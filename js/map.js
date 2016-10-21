@@ -11,19 +11,19 @@ function initMap() {
 
 }
 
-
-
-function initialize() {
-  console.log('hello?');
-
-  console.log('it should have ran by now');
-  var latlng = new google.maps.LatLng(-34.397, 150.644);
-  var mapOptions = {
-    zoom: 8,
-    center: latlng
-  }
-  map = new google.maps.Map(document.getElementById('map'), mapOptions);
-}
+// 
+//
+// function initialize() {
+//   console.log('hello?');
+//
+//   console.log('it should have ran by now');
+//   var latlng = new google.maps.LatLng(-34.397, 150.644);
+//   var mapOptions = {
+//     zoom: 8,
+//     center: latlng
+//   }
+//   map = new google.maps.Map(document.getElementById('map'), mapOptions);
+// }
 
 function codeAddress() {
   console.log('inside codeAddress');
