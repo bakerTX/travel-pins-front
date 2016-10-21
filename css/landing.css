@@ -3,6 +3,9 @@
 
   #map {
     height: 80%;
+    width: 80%;
+    margin: 0 auto;
+    border-radius:14px;
   }
   /* Optional: Makes the sample page fill the window. */
 
@@ -10,4 +13,9 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    text-align:center;
   }
+
+form {
+  margin-bottom:50px;
+}
