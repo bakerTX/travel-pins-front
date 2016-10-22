@@ -82,7 +82,7 @@ function initMap() {
       "elementType": "labels.text",
       "stylers": [
         {
-          "visibility": "on"
+          "visibility": "off"
         }
       ]
     }, {
@@ -279,7 +279,7 @@ function initMap() {
   var latlng = new google.maps.LatLng(39.8282, -98.5795);
   map = new google.maps.Map(document.getElementById('map'), {
     center: latlng,
-    zoom: 4,
+    zoom: 5,
     disableDefaultUI: true,
     styles: styles
   });
