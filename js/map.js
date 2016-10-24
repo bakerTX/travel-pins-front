@@ -325,8 +325,8 @@ function initMap() {
 // POSTING A NEW PIN
 function newPin() {
   var address = document.getElementById('search').value;
-  var journal;
-  var date;
+  var journal = document.getElementById('journal').value;
+  var date = document.getElemnetById('date').value;
   geocoder.geocode({
     'address': address
   }, function(results, status) {
@@ -360,8 +360,8 @@ function ajaxPost(custom_data){
     method: 'POST',
     data: {
       location: custom_data.address,
-      journal: 'test',
-      date: 'testdate'
+      journal: custom_data.journal,
+      date: custom_data.date
       // potentially add other defining information here
     }
   }
@@ -376,7 +376,7 @@ function ajaxPost(custom_data){
   });
 };
 
-$('.navbar-form').on('submit', function(e) {
+$('#new-pin').on('submit', function(e) {
   e.preventDefault();
   newPin();
 })

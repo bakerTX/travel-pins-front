@@ -2,10 +2,10 @@
    * element that contains the map. */
 
   #map {
-     height: 650px;
+     height: 200px;
      width: 100%;
    }
-  
+
 
   #land {
     z-index: 200000;
