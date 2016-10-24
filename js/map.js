@@ -1,6 +1,7 @@
 var map;
 var geocoder;
 function initMap() {
+  console.log('hello?');
   var styles = [
     {
       "elementType": "geometry",
@@ -285,6 +286,25 @@ function initMap() {
   });
   map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
 
+  // ON THIS MAP, FILL WITH PREVIOUSLY STORED PINS
+  var options = {
+    url: 'http://localhost:3000/pins'
+  }
+  var request = $.ajax(options);
+  request.done(function(response){
+    console.log(response);
+    for (var i = 0; i < response.length; i++){
+
+      geocoder.geocode({
+        'address': response[i].formatted_address
+      }, function(results, status) {});
+
+    }
+  })
+  request.fail(function(jqXHR, textStatus, errorThrown){
+    console.log('errorThrown: ', errorThrown);
+  })
+
 }
 
 //
@@ -302,11 +322,14 @@ function initMap() {
 // }
 
 function codeAddress() {
-  console.log('inside codeAddress');
   var address = document.getElementById('address').value;
   geocoder.geocode({
     'address': address
   }, function(results, status) {
+    console.log(results);
+    console.log(results[0].formatted_address);
+    var formatted_address = results[0].formatted_address;
+    ajaxPost(formatted_address);
     if (status == 'OK') {
       map.setCenter(results[0].geometry.location);
       var marker = new google.maps.Marker({map: map, position: results[0].geometry.location});
@@ -315,6 +338,24 @@ function codeAddress() {
     }
   });
 }
+function ajaxPost(address){
+  var options = {
+    url: 'http://localhost:3000/pins',
+    method: 'POST',
+    data: {
+      location: address
+    }
+  }
+  var request = $.ajax(options);
+
+  request.done(function(response){
+    console.log('post was successful');
+    console.log(response);
+  })
+  request.fail(function(jqXHR, textStatus, errorThrown){
+    console.log('errorThrown: ', errorThrown);
+  });
+};
 
 $('#new-pin').on('submit', function(e) {
   e.preventDefault();
