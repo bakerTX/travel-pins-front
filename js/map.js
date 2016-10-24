@@ -292,12 +292,21 @@ function initMap() {
   }
   var request = $.ajax(options);
   request.done(function(response){
-    console.log(response);
+    console.log('resp: ',response);
     for (var i = 0; i < response.length; i++){
-
+      console.log('i: ', i);
+      console.log(response[i].location)
       geocoder.geocode({
-        'address': response[i].formatted_address
-      }, function(results, status) {});
+        'address': response[i].location
+      }, function(results, status) {
+        console.log(results);
+        if (status == 'OK') {
+          // map.setCenter(results[0].geometry.location);
+          var marker = new google.maps.Marker({map: map, position: results[0].geometry.location});
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
 
     }
   })
