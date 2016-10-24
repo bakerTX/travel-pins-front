@@ -345,6 +345,7 @@ function codeAddress() {
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
+      $('#address').val('');
   });
 }
 function ajaxPost(address){
