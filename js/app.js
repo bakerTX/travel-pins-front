@@ -15,20 +15,19 @@ $(document).ready(function() {
       if (error) {
         // Handle error
         return;
-      } else {
-  
       }
-
       localStorage.setItem('id_token', authResult.idToken);
+      console.log('yes', authResult);
+      signIn();
     });
   });
 
-  $('#btn-login').on('click', function(e) {
+  $('#signin').on('click', function(e) {
     e.preventDefault();
     lock.show();
   });
 
-  $('#btn-logout').on('click', function(e) {
+  $('#signout').on('click', function(e) {
     e.preventDefault();
     logOut();
   });
@@ -40,8 +39,8 @@ $(document).ready(function() {
 });
 
 function signIn() {
-  $('#btn-login').hide()
-  $('#usernameSignedIn').show()
+  $('#signin').hide();
+  $('#signout').show();
   getPins();
 }
 
