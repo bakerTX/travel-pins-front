@@ -22,7 +22,9 @@
   }
 
   #land button {
-    margin-top: 120%;
+    position: absolute;
+    bottom: 5%;
+    margin-left: -52px;
     padding: 10px;
     font-size: 16px;
   }
