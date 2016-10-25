@@ -8,6 +8,7 @@ $(document).ready(function() {
     }
   });
   lock.on("authenticated", function(authResult) {
+    console.log('lock authenticated');
     lock.getProfile(authResult.idToken, function(error, profile) {
       if (error) {
         console.log('some error');
@@ -15,7 +16,9 @@ $(document).ready(function() {
       }
       localStorage.setItem('idToken', authResult.idToken);
       localStorage.setItem('user', authResult.idTokenPayload.sub);
+      checkSignIn();
     });
+    console.log('should have signed in here');
   });
   $('#signin').on('click', function(e) {
     e.preventDefault();
@@ -28,56 +31,63 @@ $(document).ready(function() {
   });
   function isSignedIn() {
     var idToken = localStorage.getItem('idToken');
-    if (null != idToken) {
+    if (null == idToken){
+      return false;
+    } else if (null != idToken) {
+
       lock.getProfile(idToken, function(err, profile) {
         if (err) {
+          console.log('err?');
           // Remove expired token (if any) from localStorage
           localStorage.removeItem('idToken');
           return alert('There was an error getting the profile: ' + err.message);
         } else {
           // Authenticated
+          console.log("true");
           return true;
         }
       })
-    } else {
-      return false;
+      return true;
     }
   };
-
-  if (isSignedIn()){
-    $('#signin').hide();
-    $('#signout').show();
-    fillPersonalPins();
-  } else {
-    fillExamplePins();
-  }
+  function checkSignIn(){
+    console.log('checking sign in');
+    // console.log(isSignedIn());
+    if (isSignedIn()==true){
+      console.log('is signed in');
+      $('#signin').hide();
+      $('#signout').show();
+      fillPersonalPins();
+    } else {
+      console.log('not signed in');
+      fillExamplePins();
+    }
+  };
+  checkSignIn();
 
 }); // doc ready
 
-function signIn() {
 
-  fillPersonalPins();
-}
 function fillExamplePins() {
 
 }
 
-function fillPersonalPins(){
-  console.log('filling personal pins');
-  var options = {
-    url: 'http://localhost:3000/pins',
-    headers: {
-      'Authorization': 'Bearer ' + localStorage.getItem('idToken')
-    }
-  }
-  var request = $.ajax(options)
-  request.done(function(response){
-    console.log(response);
-  })
-  request.fail(function(jqXHR, textStatus, errorThrown){
-    console.log('fuck');
-  })
-}
+// function fillPersonalPins(){
+//   console.log('filling personal pins');
+//   var options = {
+//     url: 'http://localhost:3000/pins',
+//     headers: {
+//       'Authorization': 'Bearer ' + localStorage.getItem('idToken')
+//     }
+//   }
+//   var request = $.ajax(options)
+//   request.done(function(response){
+//     console.log(response);
+//   })
+//   request.fail(function(jqXHR, textStatus, errorThrown){
+//     console.log('fuck');
+//   })
+// }
 
 function logOut() {
   localStorage.removeItem('idToken');

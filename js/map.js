@@ -12,7 +12,10 @@ function initMap() {
     // styles: styles
   });
   // map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
-
+}
+///
+// FILLING THE MAP
+function fillPersonalPins(){
   // ON THIS MAP, FILL WITH PREVIOUSLY STORED PINS
   var options = {
     url: 'http://localhost:3000/pins',
@@ -49,8 +52,13 @@ function initMap() {
     console.log('errorThrown: ', errorThrown);
   })
 }
+///
 
 // POSTING A NEW PIN
+$('#new-pin').on('submit', function(e) {
+  e.preventDefault();
+  newPin();
+})
 function newPin() {
   var address = $('#search').val();
   var journal = document.getElementById('journal').value;
@@ -89,8 +97,6 @@ function newPin() {
       $('#address').val('');
   });
 }
-
-
 function ajaxPost(custom_data){
   console.log(custom_data);
   var options = {
@@ -119,8 +125,3 @@ function ajaxPost(custom_data){
     console.log('errorThrown: ', errorThrown);
   });
 };
-
-$('#new-pin').on('submit', function(e) {
-  e.preventDefault();
-  newPin();
-})
