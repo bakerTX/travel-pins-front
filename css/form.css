@@ -6,8 +6,8 @@
 #new-pin input{
   padding: 20px;
   text-align: center;
-  background-color: #EDD6A2;
   border: none;
+  border-bottom: 2px solid black;
   width: 358px;
   margin: 2px;
   font-family: monospace;
@@ -16,27 +16,37 @@
 
 #journal{
   padding: 100px;
-  text-align: center;
   border: none;
-  background-color: #EDD6A2;
+  border-bottom: 2px solid black;
   font-family: monospace;
 }
 
 #new-pin button{
-  tr
+  background-color: transparent;
+  border: none;
+  font-family: monospace;
+  font-style: oblique;
 }
 ::-webkit-input-placeholder {
+  text-align: center;
+  font-family: monospace;
    color: black;
 }
 
 :-moz-placeholder { /* Firefox 18- */
+  text-align: center;
+  font-family: monospace;
    color: black;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
+  text-align: center;
+  font-family: monospace;
    color: black;
 }
 
 :-ms-input-placeholder {
+  text-align: center;
+  font-family: monospace;
    color: black;
 }
