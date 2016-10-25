@@ -293,12 +293,14 @@ function initMap() {
   var request = $.ajax(options);
   request.done(function(response){
     for (var i = 0; i < response.length; i++){
-      var custom_data = response[i];
-      console.log(response[i]);
+      console.log(response[i].lat);
       var marker = new google.maps.Marker({
         map: map,
-        position: response[i].location,
-        custom_data: custom_data
+        position: {lat: response[i].lat, lng: response[i].lon},
+        journal: response[i].journal,
+        date: response[i].date,
+        location: response[i].location,
+        user: response[i].user
       });
 
       marker.addListener('click', function() {
@@ -325,12 +327,13 @@ function newPin() {
   geocoder.geocode({
     address: address
   }, function(results, status) {
-    console.log(status);
     var custom_data = {}
     custom_data.user = user;
     custom_data.journal = journal;
     custom_data.date = date;
-    custom_data.address = results[0].formatted_address
+    custom_data.address = results[0].formatted_address;
+    custom_data.lon = results[0].geometry.bounds.b.b;
+    custom_data.lat = results[0].geometry.bounds.f.b;
     // *****
     // POSTING TO DB
 
@@ -359,6 +362,7 @@ function newPin() {
 
 
 function ajaxPost(custom_data){
+  console.log(custom_data);
   var options = {
     url: 'http://localhost:3000/pins',
     method: 'POST',
@@ -366,7 +370,9 @@ function ajaxPost(custom_data){
       location: custom_data.address,
       journal: custom_data.journal,
       date: custom_data.date,
-      user: custom_data.user
+      user: custom_data.user,
+      lat: custom_data.lat,
+      lon: custom_data.lon
       // potentially add other defining information here
     }
   }
