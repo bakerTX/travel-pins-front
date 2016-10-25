@@ -2,7 +2,6 @@ var map;
 var geocoder;
 
 function initMap() {
-  console.log('hello?');
   // var styles = [
   //   {
   //     "elementType": "geometry",
@@ -293,23 +292,25 @@ function initMap() {
   }
   var request = $.ajax(options);
   request.done(function(response){
-    console.log('resp: ',response);
     for (var i = 0; i < response.length; i++){
-      console.log('i: ', i);
-      console.log(response[i].location)
+      var custom_data = response[i];
       geocoder.geocode({
         'address': response[i].location
       }, function(results, status) {
-        console.log(results);
         if (status == 'OK') {
           // map.setCenter(results[0].geometry.location);
-          var marker = new google.maps.Marker({map: map, position: results[0].geometry.location});
+          var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location,
+            custom_data: custom_data
+          });
 
           marker.addListener('click', function() {
-            map.setZoom(8);
-            map.setCenter(marker.getPosition());
+            // map.setZoom(8);
+            // map.setCenter(marker.getPosition());
+            console.log(this.custom_data);
             console.log(this);
-            console.log(marker);
+
           });
         } else {
           alert('Geocode was not successful for the following reason: ' + status);
@@ -323,23 +324,34 @@ function initMap() {
   })
 }
 
-function codeAddress() {
+// POSTING A NEW PIN
+function newPin() {
   var address = document.getElementById('search').value;
+  var journal = document.getElementById('journal').value;
+  var date = document.getElemnetById('date').value;
+  var user = localStorage.getItem('user');
   geocoder.geocode({
     'address': address
   }, function(results, status) {
-    console.log(results);
-    console.log(results[0].formatted_address);
-    var formatted_address = results[0].formatted_address;
-    ajaxPost(formatted_address);
+    var custom_data = {}
+    custom_data.user = user;
+    custom_data.journal = journal;
+    custom_data.date = date;
+    custom_data.address = results[0].formatted_address
+    ajaxPost(custom_data);
     if (status == 'OK') {
       map.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({map: map, position: results[0].geometry.location});
+      var marker = new google.maps.Marker({
+        map: map,
+        position: results[0].geometry.location,
+        custom_data: custom_data
+      });
 
       marker.addListener('click', function() {
-        map.setZoom(8);
-        map.setCenter(marker.getPosition());
-        console.log(this);
+        // map.setZoom(8);
+        // map.setCenter(marker.getPosition());
+        console.log(this.custom_data);
+        console.log(this.position);
       });
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
@@ -347,12 +359,16 @@ function codeAddress() {
       $('#address').val('');
   });
 }
-function ajaxPost(address){
+function ajaxPost(custom_data){
   var options = {
     url: 'http://localhost:3000/pins',
     method: 'POST',
     data: {
-      location: address
+      location: custom_data.address,
+      journal: custom_data.journal,
+      date: custom_data.date,
+      user: custom_data.user
+      // potentially add other defining information here
     }
   }
   var request = $.ajax(options);
@@ -366,7 +382,7 @@ function ajaxPost(address){
   });
 };
 
-$('.navbar-form').on('submit', function(e) {
+$('#new-pin').on('submit', function(e) {
   e.preventDefault();
-  codeAddress();
+  newPin();
 })
