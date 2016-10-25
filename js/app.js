@@ -10,19 +10,24 @@ $(document).ready(function() {
   lock.on("authenticated", function(authResult) {
     lock.getProfile(authResult.idToken, function(error, profile) {
       if (error) {
-        // Handle error
+        console.log('some error');
         return;
       }
       localStorage.setItem('idToken', authResult.idToken);
       localStorage.setItem('user', authResult.idTokenPayload.sub);
-      console.log('yes', authResult);
-      signIn();
     });
   });
-  function isSignedIn() {
-    console.log("is signed in?");
-    var idToken = localStorage.getItem('idToken');
+  $('#signin').on('click', function(e) {
+    e.preventDefault();
+    lock.show();
+  });
 
+  $('#signout').on('click', function(e) {
+    e.preventDefault();
+    logOut();
+  });
+  function isSignedIn() {
+    var idToken = localStorage.getItem('idToken');
     if (null != idToken) {
       lock.getProfile(idToken, function(err, profile) {
         if (err) {
@@ -34,30 +39,27 @@ $(document).ready(function() {
           return true;
         }
       })
+    } else {
+      return false;
     }
   };
 
   if (isSignedIn()){
-    console.log('is signed in');
+    $('#signin').hide();
+    $('#signout').show();
     fillPersonalPins();
+  } else {
+    fillExamplePins();
   }
 
-
-  $('#signin').on('click', function(e) {
-    e.preventDefault();
-    lock.show();
-  });
-
-  $('#signout').on('click', function(e) {
-    e.preventDefault();
-    logOut();
-  });
-});
+}); // doc ready
 
 function signIn() {
-  $('#signin').hide();
-  $('#signout').show();
+
   fillPersonalPins();
+}
+function fillExamplePins() {
+
 }
 
 function fillPersonalPins(){
@@ -76,10 +78,6 @@ function fillPersonalPins(){
     console.log('fuck');
   })
 }
-
-
-
-function getPins() {}
 
 function logOut() {
   localStorage.removeItem('idToken');
