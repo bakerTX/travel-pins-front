@@ -294,6 +294,11 @@ function initMap() {
   request.done(function(response){
     for (var i = 0; i < response.length; i++){
       console.log(response[i].lat);
+      var infowindow = new google.maps.InfoWindow({
+        content: `City: ${response[i].location}
+                  Journal: ${response[i].journal}
+                  Date: ${response[i].date}`
+      })
       var marker = new google.maps.Marker({
         map: map,
         position: {lat: response[i].lat, lng: response[i].lon},
@@ -306,8 +311,8 @@ function initMap() {
       marker.addListener('click', function() {
         // map.setZoom(8);
         // map.setCenter(marker.getPosition());
-        console.log(this.custom_data);
         console.log(this);
+        infowindow.open(map, marker);
 
       });
 
