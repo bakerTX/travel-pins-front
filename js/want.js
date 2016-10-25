@@ -2,6 +2,7 @@ $(document).ready(function() {
   $('form').on('submit', function(e){
     e.preventDefault();
     var query = $('#search').val();
+    $('#showPhoto').empty();
     loadFlicks(query);
   });
 });
