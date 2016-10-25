@@ -309,6 +309,8 @@ function initMap() {
             // map.setZoom(8);
             // map.setCenter(marker.getPosition());
             console.log(this.custom_data);
+            console.log(this);
+
           });
         } else {
           alert('Geocode was not successful for the following reason: ' + status);
@@ -327,10 +329,12 @@ function newPin() {
   var address = document.getElementById('search').value;
   var journal = document.getElementById('journal').value;
   var date = document.getElemnetById('date').value;
+  var user = localStorage.getItem('user');
   geocoder.geocode({
     'address': address
   }, function(results, status) {
     var custom_data = {}
+    custom_data.user = user;
     custom_data.journal = journal;
     custom_data.date = date;
     custom_data.address = results[0].formatted_address
@@ -347,6 +351,7 @@ function newPin() {
         // map.setZoom(8);
         // map.setCenter(marker.getPosition());
         console.log(this.custom_data);
+        console.log(this.position);
       });
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
@@ -361,7 +366,8 @@ function ajaxPost(custom_data){
     data: {
       location: custom_data.address,
       journal: custom_data.journal,
-      date: custom_data.date
+      date: custom_data.date,
+      user: custom_data.user
       // potentially add other defining information here
     }
   }
