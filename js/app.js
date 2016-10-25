@@ -17,6 +17,7 @@ $(document).ready(function() {
         return;
       }
       localStorage.setItem('id_token', authResult.idToken);
+      localStorage.setItem('user', authResult.idTokenPayload.sub);
       console.log('yes', authResult);
       signIn();
     });
