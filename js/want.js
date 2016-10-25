@@ -61,8 +61,9 @@ var secret = gp.secret;
 console.log(farmId + ", " + serverId + ", " + id + ", " + secret);
 
 //  https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
-
-$("#showPhoto").append('<img src="https://farm' + farmId + '.staticflickr.com/' + serverId + '/' + id + '_' + secret + '.jpg"/>');
+var $li = $('<li />');
+$li.append('<img src="https://farm' + farmId + '.staticflickr.com/' + serverId + '/' + id + '_' + secret + '.jpg"/>');
+$('#showPhoto').append($li);
 
 // });
 });
