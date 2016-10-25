@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/master.css">
   <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/form.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 
@@ -59,16 +60,11 @@
 
   <!--Create a New Pin-->
   <form id="new-pin">
-   Location:
+   <input type="text" class="" id="search" placeholder="Location">
+  <br />
+   <input type="text" id="date" placeholder="Date" onfocus="this.placeholder = ''">
    <br />
-   <input type="text" class="" id="search" placeholder="Search">
-
-   <br />
-   Date:<br>
-   <input type="text" id="date">
-   <br>
-   Journal:<br>
-   <textarea id="journal"></textarea>
+   <textarea id="journal" placeholder="Your journal entry here... " onfocus="this.placeholder = ''"></textarea>
    <br />
    <button type="submit" class="">Submit</button>
  </form>

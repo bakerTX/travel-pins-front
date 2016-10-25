@@ -1,0 +1,42 @@
+#new-pin{
+  padding: 15px;
+  border: none;
+}
+
+#new-pin input{
+  padding: 20px;
+  text-align: center;
+  background-color: #EDD6A2;
+  border: none;
+  width: 358px;
+  margin: 2px;
+  font-family: monospace;
+  color: black;
+}
+
+#journal{
+  padding: 100px;
+  text-align: center;
+  border: none;
+  background-color: #EDD6A2;
+  font-family: monospace;
+}
+
+#new-pin button{
+  tr
+}
+::-webkit-input-placeholder {
+   color: black;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: black;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: black;
+}
+
+:-ms-input-placeholder {
+   color: black;
+}
