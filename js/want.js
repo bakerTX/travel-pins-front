@@ -18,7 +18,8 @@ var loadFlicks = function(query){ // query == json?
     jsonpCallback: "jsonFlickrApi",
     dataType: 'jsonp',
     data: {
-      api_key: 'bb51ffbd4a070baac4fcb1b8e1325a8e'
+      api_key: 'bb51ffbd4a070baac4fcb1b8e1325a8e',
+      per_page:25
     }
   })
   .done(function(response){

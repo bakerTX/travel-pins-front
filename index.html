@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/master.css">
   <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/form.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 
@@ -28,6 +29,7 @@
         <ul class="nav navbar-nav">
           <li class="active"><a href="#">My Pins <span class="sr-only">(current)</span></a></li>
           <li><a href="want.html">Where to Visit?</a></li>
+          <li><a href="newpin.html">New Pin</a></li>
         </ul>
         <form class="navbar-form navbar-left">
           <div class="form-group">
@@ -57,20 +59,20 @@
   </nav>
   <div id="map"></div>
   <div id="info"></div>
-  <form id="new-pin">
-    Location:
-    <br />
-    <input type="text" class="" id="search" placeholder="Search">
 
-    <br /> Date:
-    <br>
-    <input type="text" id="date">
-    <br> Journal:
-    <br>
-    <textarea id="journal"></textarea>
-    <br />
-    <button type="submit" class="">Submit</button>
-  </form>
+  <!--Create a New Pin-->
+  <form id="new-pin">
+   <input type="text" class="" id="search" placeholder="Location">
+  <br />
+   <input type="text" id="date" placeholder="Date">
+   <br />
+   <textarea id="journal" placeholder="Your journal entry here... " ></textarea>
+   <br />
+   <button type="submit" class="">Submit</button>
+ </form>
+
+
+
   <script>
     function initMap() {
       var mapOptions = {
@@ -85,8 +87,14 @@
   <script src="https://cdn.auth0.com/js/lock/10.4/lock.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3xsLMFn2XoZfmywOnsWn8tf0Ffvw7FF0&callback=initMap" async defer></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <script src="js/map.js" charset="utf-8"></script>
+
   <script src="js/app.js" charset="utf-8"></script>
   <script src="js/map.js" charset="utf-8"></script>
+
+
+  <script src="js/app.js" charset="utf-8"></script>
 
 
 </body>
