@@ -96,6 +96,9 @@ function ajaxPost(custom_data){
   var options = {
     url: 'http://localhost:3000/pins',
     method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem('idToken');
+    }
     data: {
       location: custom_data.address,
       journal: custom_data.journal,
