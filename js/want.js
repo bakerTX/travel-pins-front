@@ -7,12 +7,15 @@ $(document).ready(function() {
 });
 
 
-var loadFlicks = function(query){
+var loadFlicks = function(json){
+  console.log(json);
   var value= $('#cityLookup').val()
   $.ajax({
     url: 'https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&format=json&name='+ value,
+    dataType: 'jsonp',
+    jsonpCallback: 'logResults',
     data: {
-      api_key: 'bb51ffbd4a070baac4fcb1b8e1325a8e',
+      api_key: 'bb51ffbd4a070baac4fcb1b8e1325a8e'
     }
   })
   .done(function(response){
@@ -24,12 +27,12 @@ var loadFlicks = function(query){
 
 
 
-      $('.content').append('#document');
+      // $('.content').append('#document');
     }
   })
 
   .fail(function(jqXHR, textStatus, errorThrown) {
-    alert('oh no!');
+    // alert('oh no!');
     console.log(textStatus, errorThrown);
   })
   .always(function() {
@@ -38,5 +41,20 @@ var loadFlicks = function(query){
 }
 
 function jsonFlickrApi(jsonObject){
-  console.log('hello?');
+  var imageInfo = jsonObject.photos.photo
+  for (var i=0; i<=imageInfo.length; i++)
+  // console.log(imageInfo[i]);
+  // https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+  // var farm = imageInfo[i].farm
+  // var server = imageInfo[i].server
+  // var id = imageInfo[i].id
+  // var secret = imageInfo[i].secret
+  console.log(imageInfo[i].farm);
+
+  // console.log(imageInfo[i].farm + ", " + imageInfo[i].server + ", " + imageInfo[i].id + ", " + imageInfo[i].secret);
+
+  var imageUrl = 'https://' + imageInfo[i].farm + '.staticflickr.com/' + imageInfo[i].server + '/' + imageInfo[i].id + '_' + imageInfo[i].secret + '.jpg';
+
+  // $("#flickr").append('<img src="https://farm' + imageInfo[i].farm + '.staticflickr.com/' + imageInfo[i].server + '/' + imageInfo[i].id + '_' + imageInfo[i].secret+ '.jpg"/>');
+  console.log(imageUrl);
 }
