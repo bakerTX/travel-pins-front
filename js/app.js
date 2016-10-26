@@ -1,9 +1,5 @@
 $(document).ready(function() {
-  $('#new-pin-button').on('click', function(){
-    console.log('button clicked');
-    e.preventDefault();
-    $('new-pin').show();
-  });
+  
   var userProfile;
   var lock = new Auth0Lock('M2kV4wgHdg7ayYwnbYCOGksuu6Gq7SnQ', 'connorzg.auth0.com', {
     auth: {
