@@ -25,6 +25,8 @@ function fillPersonalPins(){
   }
   var request = $.ajax(options);
   request.done(function(response){
+    console.log(response);
+    var infowindows = []
     for (var i = 0; i < response.length; i++){
       console.log(response[i].lat);
       var infowindow = new google.maps.InfoWindow({
@@ -32,21 +34,21 @@ function fillPersonalPins(){
                   Journal: ${response[i].journal}
                   Date: ${response[i].date}`
       })
+      infowindows.push(infowindow);
       var marker = new google.maps.Marker({
         map: map,
         position: {lat: response[i].lat, lng: response[i].lon},
         journal: response[i].journal,
         date: response[i].date,
         location: response[i].location,
-        user: response[i].user
+        user: response[i].user,
+        infowindow: infowindow
       });
       marker.addListener('click', function() {
-        // map.setZoom(8);
-        // map.setCenter(marker.getPosition());
-        console.log(this);
-        infowindow.open(map, marker);
+        this.infowindow.open(map, this);
       });
     }
+    console.log('infowindows',infowindows);
   })
   request.fail(function(jqXHR, textStatus, errorThrown){
     console.log('errorThrown: ', errorThrown);
