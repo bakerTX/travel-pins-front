@@ -43,7 +43,6 @@ $(document).ready(function() {
           return alert('There was an error getting the profile: ' + err.message);
         } else {
           // Authenticated
-          console.log("true");
           return true;
         }
       })
