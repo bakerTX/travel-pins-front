@@ -59,6 +59,7 @@ function fillPersonalPins(){
 // POSTING A NEW PIN
 $('#new-pin').on('submit', function(e) {
   e.preventDefault();
+  $(this).hide();
   newPin();
 })
 function newPin() {

@@ -30,6 +30,12 @@ form {
  border-radius: 3px;
  padding:0.2em 0.7em;
 }
+
+#new-pin {
+  position:absolute;
+  top: 2.4em;
+  right:3em;
+}
 .navbar {
  margin-bottom:0;
 }

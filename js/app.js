@@ -1,9 +1,13 @@
 $(document).ready(function() {
+<<<<<<< HEAD
+  
+=======
   $('#new-pin-button').on('click', function(e) {
     console.log('button clicked');
     e.preventDefault();
     $('new-pin').toggle();
   });
+>>>>>>> 07e916c7462f1062e2c0bfba6f4d332ae713012b
   var userProfile;
   var lock = new Auth0Lock('M2kV4wgHdg7ayYwnbYCOGksuu6Gq7SnQ', 'connorzg.auth0.com', {
     auth: {
