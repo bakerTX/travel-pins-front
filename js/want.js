@@ -13,13 +13,14 @@ var loadFlicks = function(query){ // query == json?
   console.log(query);
   $.ajax({
     url: 'https://api.flickr.com/services/rest/?method=flickr.photos.search&text='+query+'&format=json', // replace with json? replace with query?
-    safe_search: 1,
-    content_type: 1,
     jsonpCallback: "jsonFlickrApi",
     dataType: 'jsonp',
     data: {
       api_key: 'bb51ffbd4a070baac4fcb1b8e1325a8e',
-      per_page:25
+      per_page:25,
+      safe_search: 1,
+      content_type: 1,
+      sort: 'relevance'
     }
   })
   .done(function(response){
