@@ -46,8 +46,8 @@ $(document).ready(function() {
           return alert('There was an error getting the profile: ' + err.message);
         } //authenticated
       });
+      return true;
     }
-    return true;
   };
 
   function checkSignIn() {
@@ -61,6 +61,8 @@ $(document).ready(function() {
     } else {
       console.log('not signed in');
       fillExamplePins();
+      $('#signin').show();
+      $('#signout').hide();
     }
   };
   checkSignIn();
