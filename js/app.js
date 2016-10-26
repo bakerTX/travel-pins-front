@@ -1,8 +1,8 @@
 $(document).ready(function() {
-  $('#new-pin-button').on('click', function(){
+  $('#new-pin-button').on('click', function(e) {
     console.log('button clicked');
     e.preventDefault();
-    $('new-pin').show();
+    $('new-pin').toggle();
   });
   var userProfile;
   var lock = new Auth0Lock('M2kV4wgHdg7ayYwnbYCOGksuu6Gq7SnQ', 'connorzg.auth0.com', {
@@ -19,8 +19,10 @@ $(document).ready(function() {
         console.log('some error');
         return;
       }
-      localStorage.setItem('idToken', authResult.idToken);
-      localStorage.setItem('user', authResult.idTokenPayload.sub);
+      Lockr.set('idToken', authResult.idToken);
+      // localStorage.setItem('idToken', authResult.idToken);
+      Lockr.set('user', authResult.idTokenPayload.sub);
+      // localStorage.setItem('user', authResult.idTokenPayload.sub);
       checkSignIn();
     });
     console.log('should have signed in here');
@@ -35,29 +37,23 @@ $(document).ready(function() {
     logOut();
   });
   function isSignedIn() {
-    var idToken = localStorage.getItem('idToken');
-    if (null == idToken){
-      return false;
-    } else if (null != idToken) {
-
+    var idToken = Lockr.get('idToken');
+    if (null != idToken) {
       lock.getProfile(idToken, function(err, profile) {
         if (err) {
-          console.log('err?');
-          // Remove expired token (if any) from localStorage
-          localStorage.removeItem('idToken');
+          // Remove expired token (if any) from storage
+          Lockr.rm('idToken');
           return alert('There was an error getting the profile: ' + err.message);
-        } else {
-          // Authenticated
-          return true;
-        }
-      })
-      return true;
+        } //authenticated
+      });
     }
+    return true;
   };
-  function checkSignIn(){
+
+  function checkSignIn() {
     console.log('checking sign in');
     // console.log(isSignedIn());
-    if (isSignedIn()==true){
+    if (isSignedIn() == true) {
       console.log('is signed in');
       $('#signin').hide();
       $('#signout').show();
@@ -71,10 +67,7 @@ $(document).ready(function() {
 
 }); // doc ready
 
-
-function fillExamplePins() {
-
-}
+function fillExamplePins() {}
 
 // function fillPersonalPins(){
 //   console.log('filling personal pins');
@@ -97,6 +90,7 @@ function logOut() {
   localStorage.removeItem('idToken');
   localStorage.removeItem('profile');
   localStorage.removeItem('user');
+  Lockr.rm('idToken');
   userProfile = null;
   window.location.href = "/";
 };
