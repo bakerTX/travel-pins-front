@@ -1,13 +1,5 @@
 body {
   text-align:center;
-  background-color:rgb(89,181,36);
-}
-#home {
-  float:right;
-  padding:30px;
-  background-color:white;
-  color:green;
-  font-size:36px;
 }
 
 input {
@@ -20,7 +12,7 @@ input {
 button {
   height:70px;
   font-size:36px;
-  background-color:transparent;
+  background-color:black;
   border: 1px solid #fff;
   color: #fff;
 }
