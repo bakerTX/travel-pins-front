@@ -31,4 +31,10 @@ button {
 li {
   text-decoration: none;
   display:inline-block;
+  vertical-align: middle;
+  padding: 8px;
 }
+
+/*#showPhoto{
+
+}*/

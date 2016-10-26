@@ -1,0 +1,97 @@
+*:focus {
+    outline: none;
+}
+
+#new-pin{
+  padding: 15px;
+  border: none;
+}
+
+#new-pin input{
+  padding: 20px;
+  text-align: center;
+  border: none;
+  border-bottom: 2px solid black;
+  width: 358px;
+  margin: 2px;
+  font-family: monospace;
+  color: black;
+  text-align: center;
+}
+
+#journal{
+  padding: 100px;
+  border: none;
+  border-bottom: 2px solid black;
+  font-family: monospace;
+  text-align: center;
+}
+
+
+#new-pin button{
+  background-color: transparent;
+  border: 1px solid black;
+  font-family: monospace;
+  font-style: oblique;
+}
+::-webkit-input-placeholder {
+  text-align: center;
+  font-family: monospace;
+   color: red;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  text-align: center;
+  font-family: monospace;
+   color: red;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+  text-align: center;
+  font-family: monospace;
+   color: red;
+}
+
+:-ms-input-placeholder {
+  text-align: center;
+  font-family: monospace;
+   color: red;
+}
+
+input:focus::-webkit-input-placeholder {
+  color:transparent;
+}
+
+    /* Mozilla Firefox 4 to 18 */
+input:focus:-moz-placeholder {
+  color:transparent;
+}
+
+    /* Mozilla Firefox 19+ */
+input:focus::-moz-placeholder {
+  color:transparent;
+}
+
+    /* Internet Explorer 10+ */
+input:focus:-ms-input-placeholder {
+  color:transparent;
+}
+
+textarea:focus::-webkit-input-placeholder {
+  color:transparent;
+}
+
+    /* Mozilla Firefox 4 to 18 */
+textarea:focus:-moz-placeholder {
+  color:transparent;
+}
+
+    /* Mozilla Firefox 19+ */
+textarea:focus::-moz-placeholder {
+  color:transparent;
+}
+
+    /* Internet Explorer 10+ */
+textarea:focus:-ms-input-placeholder {
+  color:transparent;
+}
