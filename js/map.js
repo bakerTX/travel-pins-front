@@ -18,6 +18,7 @@ function initMap() {
 // FILLING THE MAP
 function fillPersonalPins(){
   // ON THIS MAP, FILL WITH PREVIOUSLY STORED PINS
+  var markers = []
   var options = {
     url: 'http://localhost:3000/pins',
     headers: {
@@ -37,15 +38,29 @@ function fillPersonalPins(){
         date: response[i].date,
         location: response[i].location,
         user: response[i].user,
-        infowindow: infowindow
+        infowindow: infowindow,
+        index: i
       });
+      markers.push(marker);
       google.maps.event.addListener(marker, 'click', function() {
        this.infowindow.setContent(
        `City: ${this.location}<br>
        Date: ${this.date}<br>
-       Journal: ${this.journal}`);
+       Journal: ${this.journal}<br>
+       <span id='delete'>Delete Pin</span>`);
        infowindow.open(map, this);
     });
+
+      google.maps.event.addListener(marker, 'click', function(e) {
+        console.log(this);
+        var index = this.index;
+        const thismarker = e.currentTarget;
+        $('#delete').click(function(thismarker) {
+          console.log(thismarker);
+          markers[index].setMap(null);
+          });
+    })
+
       // marker.addListener('click', function() {
       //   var infowindow = new google.maps.InfoWindow({
       //     content: `City: ${this.location}<br>
@@ -67,6 +82,7 @@ function fillPersonalPins(){
 // POSTING A NEW PIN
 $('#new-pin').on('submit', function(e) {
   e.preventDefault();
+  $(this).hide();
   newPin();
 })
 function newPin() {
