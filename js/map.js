@@ -45,9 +45,6 @@ function fillPersonalPins(){
         infowindow: infowindow
       });
       marker.addListener('click', function() {
-        // map.setZoom(8);
-        // map.setCenter(marker.getPosition());
-        console.log(this);
         this.infowindow.open(map, this);
       });
     }
