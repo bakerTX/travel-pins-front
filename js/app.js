@@ -1,4 +1,13 @@
 $(document).ready(function() {
+  $('#cityLookup').on('submit',function(e){
+    e.preventDefault();
+    window.setTimeout(function(){
+      window.scrollTo(0,525);
+
+    }, 900);
+
+
+  })
   $('#new-pin-button').on('click', function(e) {
     console.log('button clicked');
     e.preventDefault();
@@ -69,7 +78,26 @@ $(document).ready(function() {
 
 }); // doc ready
 
-function fillExamplePins() {}
+function fillExamplePins() {
+  console.log('filling example pins');
+  console.log(map);
+  var marker = new google.maps.Marker({
+    // Jackson WY
+    position: {lat: 43.4912, lng: -110.81347},
+    map: map
+  })
+  var marker = new google.maps.Marker({
+    // New York City
+    position: {lat: 40.7128, lng: -74.0059},
+    map: map
+  })
+  var marker = new google.maps.Marker({
+    // Scotland
+    position: {lat: 56.4907, lng: -4.2026},
+    map: map
+  })
+
+}
 
 // function fillPersonalPins(){
 //   console.log('filling personal pins');

@@ -23,6 +23,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#">Travel Pins</a>
+        <img height='60px' src="images/logo.png">
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -58,19 +59,21 @@
 
     <!--Container for Images  -->
 
-  <ul id="showPhoto"></ul>
+
+  <ul id="showPhoto"><a href="showPhoto"></a></ul>
 
   </form>
-  <script>
+  <!-- <script>
     function initMap() {
       var mapOptions = {
         center: new google.maps.LatLng(15, 0),
         zoom: 5,
-        minZoom: 5
+        minZoom: 5,
+        maxZoom: 25
       };
       var map = new google.maps.Map(document.getElementById("map"), mapOptions);
     }
-  </script>
+  </script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script> // the only place where this damn event listener will setup properly
     $('#new-pin-button').on('click', function(e){
