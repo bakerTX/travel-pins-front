@@ -71,7 +71,20 @@
    <button type="submit" class="">Submit</button>
  </form>
 
+<!-- Image search and show -->
 
+<div class="photoSearch">
+
+  <ul class="content"></ul>
+  <form id="cityLookup">
+    <input type="text" name="name" id="search" autocomplete="off" placeholder="Where do you want to go?">
+    <button type="submit" name="button">Search</button>
+
+    <!--Container for Images  -->
+  <ul id="showPhoto"></ul>
+  </form>
+
+</div>
 
   <script>
     function initMap() {
@@ -83,17 +96,17 @@
       var map = new google.maps.Map(document.getElementById("map"), mapOptions);
     }
   </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdn.auth0.com/js/lock/10.4/lock.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3xsLMFn2XoZfmywOnsWn8tf0Ffvw7FF0&callback=initMap" async defer></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
   <script src="js/map.js" charset="utf-8"></script>
-
   <script src="js/app.js" charset="utf-8"></script>
   <script src="js/map.js" charset="utf-8"></script>
-
-
+  <script src="js/want.js" charset="utf-8"></script>
   <script src="js/app.js" charset="utf-8"></script>
 
 
