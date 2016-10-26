@@ -20,7 +20,7 @@ function fillPersonalPins(){
   var options = {
     url: 'http://localhost:3000/pins',
     headers: {
-      'Authorization': 'Bearer ' + localStorage.getItem('idToken')
+      'Authorization': 'Bearer ' + Lockr.get('idToken')
     }
   }
   var request = $.ajax(options);
@@ -66,7 +66,8 @@ function newPin() {
   var address = $('#search').val();
   var journal = document.getElementById('journal').value;
   var date = document.getElementById('date').value;
-  var user = localStorage.getItem('user');
+  // var user = localStorage.getItem('user');
+  var user = Lockr.get('user');
   geocoder.geocode({
     address: address
   }, function(results, status) {
@@ -106,7 +107,7 @@ function ajaxPost(custom_data){
     url: 'http://localhost:3000/pins',
     method: 'POST',
     headers: {
-      'Authorization': 'Bearer ' + localStorage.getItem('idToken')
+      'Authorization': 'Bearer ' + Lockr.get('idToken')
     },
     data: {
       location: custom_data.address,
