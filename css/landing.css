@@ -1,43 +1,59 @@
-  /* Always set the map height explicitly to define the size of the div
-   * element that contains the map. */
+body {
+  /*Liquid layout fundamentals*/
+  width: 90%;
+  margin: 0 auto;
+  position:relative;
+}
 
-  #map {
-     height: 400px;
-     width: 100%;
-   }
+
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+
+#map {
+   height: 490px;
+   width: 100%;
+ }
+
+form {
+ margin-bottom: 50px;
+}
+
+#new-pin-button {
+ z-index: 200005;
+ position:absolute;
+ top: 2.4em;
+ right:1em;
+ font-size: 2.3em;
+ color: white;
+ background-color:rgb(30,180,80);
+ border: none;
+ border-radius: 3px;
+ padding:0.3em 0.8em;
+}
+.navbar {
+ margin-bottom:0;
+}
 
 
-  #land {
+  /*#land {
     z-index: 200000;
     position: absolute;
     margin-left: -250px;
     left: 50%;
     height: 100%;
     width: 500px;
-  }
+  }*/
 
-  h1 {
+  /*h1 {
     color: black;
     font-weight: bold;
     font-size: 80px;
-  }
+  }*/
 
-  #land button {
+  /*#land button {
     position: absolute;
     bottom: 5%;
     margin-left: -52px;
     padding: 10px;
     font-size: 16px;
-  }
-  /* Optional: Makes the sample page fill the window. */
-
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-  }
-
-  form {
-    margin-bottom: 50px;
-  }
+  }*/
