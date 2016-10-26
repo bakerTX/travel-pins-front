@@ -1,6 +1,6 @@
 body {
   /*Liquid layout fundamentals*/
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   position:relative;
 }
@@ -28,32 +28,8 @@ form {
  background-color:rgb(30,180,80);
  border: none;
  border-radius: 3px;
- padding:0.3em 0.8em;
+ padding:0.2em 0.7em;
 }
 .navbar {
  margin-bottom:0;
 }
-
-
-  /*#land {
-    z-index: 200000;
-    position: absolute;
-    margin-left: -250px;
-    left: 50%;
-    height: 100%;
-    width: 500px;
-  }*/
-
-  /*h1 {
-    color: black;
-    font-weight: bold;
-    font-size: 80px;
-  }*/
-
-  /*#land button {
-    position: absolute;
-    bottom: 5%;
-    margin-left: -52px;
-    padding: 10px;
-    font-size: 16px;
-  }*/
