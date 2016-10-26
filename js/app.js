@@ -95,4 +95,5 @@ function logOut() {
   Lockr.rm('idToken');
   userProfile = null;
   window.location.href = "/";
+
 };
