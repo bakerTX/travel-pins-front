@@ -13,6 +13,7 @@ function initMap() {
   });
   // map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
 }
+
 ///
 // FILLING THE MAP
 function fillPersonalPins(){
@@ -26,15 +27,9 @@ function fillPersonalPins(){
   var request = $.ajax(options);
   request.done(function(response){
     console.log(response);
-    var infowindows = []
+    var infowindow = new google.maps.InfoWindow()
     for (var i = 0; i < response.length; i++){
       console.log(response[i].lat);
-      var infowindow = new google.maps.InfoWindow({
-        content: `City: ${response[i].location}
-                  Journal: ${response[i].journal}
-                  Date: ${response[i].date}`
-      })
-      infowindows.push(infowindow);
       var marker = new google.maps.Marker({
         map: map,
         position: {lat: response[i].lat, lng: response[i].lon},
@@ -44,15 +39,28 @@ function fillPersonalPins(){
         user: response[i].user,
         infowindow: infowindow
       });
-      marker.addListener('click', function() {
-        this.infowindow.open(map, this);
-      });
+      google.maps.event.addListener(marker, 'click', function() {
+       this.infowindow.setContent(
+       `City: ${this.location}<br>
+       Date: ${this.date}<br>
+       Journal: ${this.journal}`);
+       infowindow.open(map, this);
+    });
+      // marker.addListener('click', function() {
+      //   var infowindow = new google.maps.InfoWindow({
+      //     content: `City: ${this.location}<br>
+      //     Date: ${this.date}<br>
+      //     Journal: ${this.journal}`
+      //   });
+      //   console.log(this.date);
+      //   infowindow.open(map, this);
+      // });
     }
-    console.log('infowindows',infowindows);
   })
   request.fail(function(jqXHR, textStatus, errorThrown){
     console.log('errorThrown: ', errorThrown);
   })
+
 }
 ///
 
