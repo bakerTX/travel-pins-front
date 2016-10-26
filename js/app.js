@@ -99,4 +99,5 @@ function logOut() {
   localStorage.removeItem('user');
   userProfile = null;
   window.location.href = "/";
+
 };
