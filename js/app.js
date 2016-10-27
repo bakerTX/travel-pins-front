@@ -53,7 +53,6 @@ $(document).ready(function() {
     console.log('should have signed in here');
   });
 
-
   function checkSignIn() {
     console.log('checking sign in');
     // console.log(isSignedIn());
@@ -61,6 +60,7 @@ $(document).ready(function() {
       console.log('is signed in');
       $('#signin').hide();
       $('#signout').show();
+      clearMap();
       fillPersonalPins();
     } else {
       console.log('not signed in');
@@ -70,6 +70,12 @@ $(document).ready(function() {
     }
   };
   checkSignIn();
+
+  function clearMap(){
+    for (var i = 0; i < examplePins.length; i++){
+      examplePins[i].setMap(null);
+    }
+  }
 
   function isSignedIn() {
     var idToken = Lockr.get('idToken');
@@ -85,22 +91,25 @@ $(document).ready(function() {
     }
   };
 
+
 function fillExamplePins() {
   console.log('filling example pins');
   console.log(map);
-  markerJackson();
-  markerScotland();
-  markerNYC();
+  var infowindow = new google.maps.InfoWindow()
+  markerJackson(infowindow);
+  markerScotland(infowindow);
+  markerNYC(infowindow);
 }
 
-function markerJackson() {
-  var infowindow = new google.maps.InfoWindow()
+function markerJackson(infowindow) {
+
   var markerJackson = new google.maps.Marker({
     // Jackson WY
     position: {lat: 43.4912, lng: -110.81347},
     map: map,
     infowindow: infowindow
   })
+  examplePins.push(markerJackson);
   google.maps.event.addListener(markerJackson, 'click', function(e) {
     var marker = e.currentTarget;
     this.infowindow.setContent(
@@ -112,14 +121,15 @@ function markerJackson() {
   });
 }
 
-function markerScotland() {
-  var infowindow = new google.maps.InfoWindow()
+function markerScotland(infowindow) {
+  // var infowindow = new google.maps.InfoWindow()
   var markerScotland = new google.maps.Marker({
     // Scotland
     position: {lat: 57.8918, lng: -4.3464},
     map: map,
     infowindow: infowindow
   })
+  examplePins.push(markerScotland)
   google.maps.event.addListener(markerScotland, 'click', function(e) {
     var marker = e.currentTarget;
     this.infowindow.setContent(
@@ -131,14 +141,15 @@ function markerScotland() {
 })
 }
 
-function markerNYC() {
-  var infowindow = new google.maps.InfoWindow()
+function markerNYC(infowindow) {
+  // var infowindow = new google.maps.InfoWindow()
   var markerNYC = new google.maps.Marker({
     // New York City
     position: {lat: 40.7128, lng: -74.0059},
     map: map,
     infowindow: infowindow
   })
+  examplePins.push(markerNYC);
   google.maps.event.addListener(markerNYC, 'click', function(e) {
     var marker = e.currentTarget;
     this.infowindow.setContent(
@@ -148,6 +159,10 @@ function markerNYC() {
     )
     infowindow.open(map, markerNYC)
   });
+}
+
+function clearMarkers() {
+  setMapOnAll(null);
 }
 
 function clickNewPin() {

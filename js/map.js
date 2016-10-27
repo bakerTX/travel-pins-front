@@ -12,6 +12,7 @@ function initMap() {
   });
 }
 var markers = []
+var examplePins = []
 
 ///
 // FILLING THE MAP
