@@ -13,12 +13,12 @@ function initMap() {
   });
   // map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
 }
+var markers = []
 
 ///
 // FILLING THE MAP
 function fillPersonalPins(){
   // ON THIS MAP, FILL WITH PREVIOUSLY STORED PINS
-  var markers = []
   var options = {
     url: 'http://localhost:3000/pins',
     headers: {
@@ -83,7 +83,7 @@ function fillPersonalPins(){
 $('#new-pin').on('submit', function(e) {
   e.preventDefault();
   $(this).hide();
-  newPin();
+  // newPin();
 })
 function newPin() {
   var address = $('#search').val();
