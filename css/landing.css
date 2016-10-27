@@ -14,9 +14,7 @@ body {
    width: 100%;
  }
 
-form {
- margin-bottom: 50px;
-}
+
 
 #new-pin-button {
  z-index: 200005;
@@ -31,11 +29,7 @@ form {
  padding:0.2em 0.7em;
 }
 
-#new-pin {
-  position:absolute;
-  top: 2.4em;
-  right:3em;
-}
+
 .navbar {
  margin-bottom:0;
 }

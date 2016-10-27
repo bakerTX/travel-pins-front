@@ -37,6 +37,7 @@ var loadFlicks = function(query){ // query == json?
 
 function jsonFlickrApi(jsonObject){
   console.log(jsonObject);
+  //There is a bug in the line of code below.
   $.each( jsonObject.photos.photo, function( i, gp ) {
 
   var farmId = gp.farm;
