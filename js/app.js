@@ -135,7 +135,7 @@ function markerScotland(infowindow) {
     this.infowindow.setContent(
       `City: Bonar Bridge, Scotland<br>
       Date: January 19<br>
-      Journal: Locals can be quite test`
+      Journal: Locals can be quite testy`
     )
     infowindow.open(map, markerScotland)
 })
