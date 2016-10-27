@@ -13,6 +13,7 @@ $(document).ready(function() {
     e.preventDefault();
     // $('new-pin').toggle();
     clickNewPin();
+
   });
 
   $('#signin').on('click', function(e) {
@@ -84,6 +85,7 @@ $(document).ready(function() {
   };
 
 }); // doc ready
+
 
 function fillExamplePins() {
   console.log('filling example pins');
