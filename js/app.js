@@ -62,11 +62,13 @@ $(document).ready(function() {
       $('#signin').hide();
       $('#signout').show();
       clearMap();
+      $('#new-pin-button').show();
       fillPersonalPins();
 
     } else {
       console.log('not signed in');
       fillExamplePins();
+      $('#new-pin-button').hide();
       $('#signin').show();
       $('#signout').hide();
     }
@@ -137,7 +139,7 @@ function markerScotland(infowindow) {
     this.infowindow.setContent(
       `City: Bonar Bridge, Scotland<br>
       Date: January 19<br>
-      Journal: Locals can be quite test`
+      Journal: Locals can be quite testy`
     )
     infowindow.open(map, markerScotland)
 })
@@ -166,17 +168,6 @@ function markerNYC(infowindow) {
 function clearMarkers() {
   setMapOnAll(null);
 }
-
-
-// google.maps.event.addListener(marker, 'click', function(e) {
-//   console.log(this);
-//   var index = this.index;
-//   const thismarker = e.currentTarget;
-//   $('#delete').click(function(thismarker) {
-//     console.log(thismarker);
-//     markers[index].setMap(null);
-//     });
-// })
 
 function clickNewPin() {
   map.setOptions({draggableCursor:'crosshair'});

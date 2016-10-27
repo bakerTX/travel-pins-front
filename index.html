@@ -16,24 +16,25 @@
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
-        </button>
+        </button> -->
         <a class="navbar-brand" href="#">Travel <span id='pins-title'>Pins</span></a>
         <img height='60px' src="images/logo.png">
 
       </div>
 
 
-
+<!-- id="signin"
+id="signout" -->
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          <li><a id="signin" href="#">Sign In</a></li>
-          <li><a id="signout" style="display: none" href="#">Sign Out</a></li>
+          <li><a id="signin" class="btn btn-primary" href="#">Sign In</a></li>
+          <li><a id='signout' class="btn btn-primary" style="display: none" href="#">Sign Out</a></li>
         </ul>
       </div>
       <!-- /.navbar-collapse -->
@@ -42,14 +43,14 @@
   </nav>
 
   <!-- Directions Prompt -->
-  <div class="alert alert-warning alert-dismissible" role="alert">
+  <div id="tutorial" class="alert alert-warning alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   Click on pin to see preview or Login to get started!
   </div>
 
-  
+
   <div id="map"></div>
-  <button id="new-pin-button">+</button>
+  <button class="btn btn-danger" id="new-pin-button">+</button>
   <div id="info"></div>
   <div class="container-fluid" id="wholepage">
 
@@ -66,7 +67,7 @@
 <!-- Image search and show -->
   <ul class="content"></ul>
   <form id="cityLookup">
-    <input type="text" name="name" id="searchPlace" autocomplete="off" placeholder="Where do you want to go?">
+    <input type="text" name="name" id="searchPlace" autocomplete="off" placeholder="Explore Destination Images">
     <button type="submit" name="button">Search</button>
 
     <!--Container for Images  -->
