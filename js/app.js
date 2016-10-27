@@ -11,6 +11,7 @@ $(document).ready(function() {
   $('#new-pin-button').on('click', function(e) {
 
     console.log('button clicked');
+    $("#new-pin-button").css('cursor: crosshair');
     e.preventDefault();
     clickNewPin();
 
@@ -144,6 +145,7 @@ $(document).ready(function() {
       e.preventDefault();
       if (isSignedIn()==undefined){
         alert('sign in first! :)');
+        lock.show();
       }
       console.log('new-pin submitted');
       var journal = document.getElementById('journal').value;
