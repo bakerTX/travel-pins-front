@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('form').on('submit', function(e){
+  $('#cityLookup').on('submit', function(e){
     e.preventDefault();
     var query = $('#searchPlace').val(); // query comes from the word typed into the search field
     $('#showPhoto').empty();
@@ -49,7 +49,5 @@ function jsonFlickrApi(jsonObject){
   $li.append('<img src="https://farm' + farmId + '.staticflickr.com/' + serverId + '/' + id + '_' + secret + '_m.jpg"/>');
   $('#showPhoto').append($li);
   });
-
-
 
 };
