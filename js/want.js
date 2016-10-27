@@ -49,6 +49,4 @@ function jsonFlickrApi(jsonObject){
   $('#showPhoto').append($li);
   });
 
-
-
 };
