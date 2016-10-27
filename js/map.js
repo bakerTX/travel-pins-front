@@ -19,7 +19,7 @@ var markers = []
 ///
 // FILLING THE MAP
 function fillPersonalPins(){
-  var markers = [];
+  console.log('fillingpersonal');
   // ON THIS MAP, FILL WITH PREVIOUSLY STORED PINS
   var options = {
     url: 'http://localhost:3000/pins',
@@ -44,7 +44,8 @@ function fillPersonalPins(){
         index: i
 
       });
-      markers.push(marker)
+      markers.push(marker);
+
       google.maps.event.addListener(marker, 'click', function() {
          console.log(this);
          this.infowindow.setContent(
@@ -72,7 +73,6 @@ function fillPersonalPins(){
           request.done(function(response){
             console.log('deleted');
           });
-
         });
     })
     }
@@ -84,10 +84,52 @@ function fillPersonalPins(){
 }
 ///
 
-// // POSTING A NEW PIN
+
+// function newPin() {
+//   var address = $('#search').val();
+//   var journal = document.getElementById('journal').value;
+//   var date = document.getElementById('date').value;
+//   // var user = localStorage.getItem('user');
+//   var user = Lockr.get('user');
+//   geocoder.geocode({
+//     address: address
+//   }, function(results, status) {
+//     var custom_data = {}
+//     custom_data.user = user;
+//     custom_data.journal = journal;
+//     custom_data.date = date;
+//     custom_data.address = results[0].formatted_address;
+//     custom_data.lon = results[0].geometry.bounds.b.b;
+//     custom_data.lat = results[0].geometry.bounds.f.b;
+//     // *****
+//     // POSTING TO DB
+//     ajaxPost(custom_data);
+//     //****
+//     if (status == 'OK') {
+//       map.setCenter(results[0].geometry.location);
+//       var marker = new google.maps.Marker({
+//         map: map,
+//         position: results[0].geometry.location,
+//         custom_data: custom_data
+//       });
+//
+//       marker.addListener('click', function() {
+//         // map.setZoom(8);
+//         // map.setCenter(marker.getPosition());
+//         console.log(this.custom_data);
+//       });
+//     } else {
+//       alert('Geocode was not successful for the following reason: ' + status);
+//     }
+//       $('#address').val('');
+//   });
+// }
+
+// POSTING A NEW PIN
 // $('#new-pin').on('submit', function(e) {
 //   console.log('new-pin submitted');
 //   if (isSignedIn()==undefined){
+//     alert('please sign in first!');
 //     signin();
 //   } else{
 //     e.preventDefault();
@@ -95,45 +137,7 @@ function fillPersonalPins(){
 //     // newPin();
 //   }
 // })
-function newPin() {
-  var address = $('#search').val();
-  var journal = document.getElementById('journal').value;
-  var date = document.getElementById('date').value;
-  // var user = localStorage.getItem('user');
-  var user = Lockr.get('user');
-  geocoder.geocode({
-    address: address
-  }, function(results, status) {
-    var custom_data = {}
-    custom_data.user = user;
-    custom_data.journal = journal;
-    custom_data.date = date;
-    custom_data.address = results[0].formatted_address;
-    custom_data.lon = results[0].geometry.bounds.b.b;
-    custom_data.lat = results[0].geometry.bounds.f.b;
-    // *****
-    // POSTING TO DB
-    ajaxPost(custom_data);
-    //****
-    if (status == 'OK') {
-      map.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-        map: map,
-        position: results[0].geometry.location,
-        custom_data: custom_data
-      });
 
-      marker.addListener('click', function() {
-        // map.setZoom(8);
-        // map.setCenter(marker.getPosition());
-        console.log(this.custom_data);
-      });
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-      $('#address').val('');
-  });
-}
 function ajaxPost(custom_data){
   console.log(custom_data);
   var options = {
@@ -152,11 +156,13 @@ function ajaxPost(custom_data){
       // potentially add other defining information here
     }
   }
+  console.log('request');
   var request = $.ajax(options);
-
+  console.log('after');
   request.done(function(response){
     console.log('post was successful');
     console.log(response);
+
   })
   request.fail(function(jqXHR, textStatus, errorThrown){
     console.log('errorThrown: ', errorThrown);
