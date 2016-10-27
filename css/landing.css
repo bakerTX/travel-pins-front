@@ -11,13 +11,9 @@ body {
 
 #map {
    height: 490px;
-
    width: 70%;
-
    margin: 0 auto;
  }
-
-
 
 #new-pin-button {
  z-index: 200005;
