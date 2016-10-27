@@ -62,11 +62,13 @@ $(document).ready(function() {
       $('#signin').hide();
       $('#signout').show();
       clearMap();
+      $('#new-pin-button').show();
       fillPersonalPins();
 
     } else {
       console.log('not signed in');
       fillExamplePins();
+      $('#new-pin-button').hide();
       $('#signin').show();
       $('#signout').hide();
     }

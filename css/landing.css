@@ -3,6 +3,7 @@ body {
   width: 100%;
   margin: 0 auto;
   position:relative;
+  background-color: #f8f8f8;
 }
 
 
@@ -15,23 +16,33 @@ body {
    width: 70%;
 
    margin: 0 auto;
+   margin-top: 20px;
  }
 
 
 
 #new-pin-button {
+ display: none;
  z-index: 200005;
  position:absolute;
- top: 4em;
- right:1em;
+ top: 2.5em;
+ right: 13%;
  font-size: 2.3em;
  color: white;
- background-color:rgb(30,180,80);
+ background-color:#f34c44;
  border: none;
  border-radius: 3px;
- padding:0.2em 0.7em;
+ /*padding:0.2em 0.7em;*/
+ padding: 0 25px;
 }
 
+
+
+.close span {
+  position: relative;
+  bottom: 35px;
+  right: 15px;
+}
 
 .navbar {
  margin-bottom:0;
@@ -46,3 +57,21 @@ body {
 .navsize {
   max-width: 90%;
 }
+
+.btn-primary {
+  color: white !important;
+}
+
+.btn-primary:hover {
+  color: black !important;
+}
+
+#tutorial {
+  font-family: monospace;
+}
+
+/*.btn-success:hover {
+  color: grey !important;
+  background-color: white;
+  border: solid2px #4cae4c !important;
+}*/
