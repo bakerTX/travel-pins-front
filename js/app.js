@@ -9,9 +9,9 @@ $(document).ready(function() {
 
   })
   $('#new-pin-button').on('click', function(e) {
+
     console.log('button clicked');
     e.preventDefault();
-    // $('new-pin').toggle();
     clickNewPin();
 
   });
@@ -112,6 +112,7 @@ $(document).ready(function() {
     map.setOptions({draggableCursor:'crosshair'});
     var listen = google.maps.event.addListener(map, 'click', geo);
     function geo(event) {
+      $('#new-pin').show();
       map.setOptions({draggableCursor:'null'});
       geocoder.geocode({
         'latLng': event.latLng
@@ -127,7 +128,7 @@ $(document).ready(function() {
   }
 
   function placeMarker(location, address, listen) {
-    $('#new-pin').show();
+     // show the new form but we want this to be after a click on the map
     var user = Lockr.get('user');
     var marker = new google.maps.Marker({
         position: location,
