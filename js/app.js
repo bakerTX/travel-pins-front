@@ -84,26 +84,82 @@ $(document).ready(function() {
       return true;
     }
   };
-  function fillExamplePins() {
-    console.log('filling example pins');
-    console.log(map);
-    var marker = new google.maps.Marker({
-      // Jackson WY
-      position: {lat: 43.4912, lng: -110.81347},
-      map: map
-    })
-    var marker = new google.maps.Marker({
-      // New York City
-      position: {lat: 40.7128, lng: -74.0059},
-      map: map
-    })
-    var marker = new google.maps.Marker({
-      // Scotland
-      position: {lat: 56.4907, lng: -4.2026},
-      map: map
-    })
 
-  }
+function fillExamplePins() {
+  console.log('filling example pins');
+  console.log(map);
+  markerJackson();
+  markerScotland();
+  markerNYC();
+}
+
+function markerJackson() {
+  var infowindow = new google.maps.InfoWindow()
+  var markerJackson = new google.maps.Marker({
+    // Jackson WY
+    position: {lat: 43.4912, lng: -110.81347},
+    map: map,
+    infowindow: infowindow
+  })
+  google.maps.event.addListener(markerJackson, 'click', function(e) {
+    var marker = e.currentTarget;
+    this.infowindow.setContent(
+      `City: Jackson Hole, WY<br>
+      Date: March 2014<br>
+      Journal: Shredded pow pow on the mountain`
+    )
+    infowindow.open(map, markerJackson)
+  });
+}
+
+function markerScotland() {
+  var infowindow = new google.maps.InfoWindow()
+  var markerScotland = new google.maps.Marker({
+    // Scotland
+    position: {lat: 57.8918, lng: -4.3464},
+    map: map,
+    infowindow: infowindow
+  })
+  google.maps.event.addListener(markerScotland, 'click', function(e) {
+    var marker = e.currentTarget;
+    this.infowindow.setContent(
+      `City: Bonar Bridge, Scotland<br>
+      Date: January 19<br>
+      Journal: Locals can be quite test`
+    )
+    infowindow.open(map, markerScotland)
+})
+}
+
+function markerNYC() {
+  var infowindow = new google.maps.InfoWindow()
+  var markerNYC = new google.maps.Marker({
+    // New York City
+    position: {lat: 40.7128, lng: -74.0059},
+    map: map,
+    infowindow: infowindow
+  })
+  google.maps.event.addListener(markerNYC, 'click', function(e) {
+    var marker = e.currentTarget;
+    this.infowindow.setContent(
+      `City: New York City, New York<br>
+      Date: Aug 2015<br>
+      Journal: Spent so much money`
+    )
+    infowindow.open(map, markerNYC)
+  });
+}
+
+
+// google.maps.event.addListener(marker, 'click', function(e) {
+//   console.log(this);
+//   var index = this.index;
+//   const thismarker = e.currentTarget;
+//   $('#delete').click(function(thismarker) {
+//     console.log(thismarker);
+//     markers[index].setMap(null);
+//     });
+// })
 
 function clickNewPin() {
   map.setOptions({draggableCursor:'crosshair'});
@@ -126,25 +182,6 @@ function clickNewPin() {
   };
 };
 
-//   function clickNewPin() {
-//     map.setOptions({draggableCursor:'crosshair'});
-//     var listen = google.maps.event.addListener(map, 'click', geo);
-//     function geo(event) {
-//       $('#new-pin').show();
-//       map.setOptions({draggableCursor:'null'});
-//       geocoder.geocode({
-//         'latLng': event.latLng
-//       }, function(results, status) {
-//         if (status == google.maps.GeocoderStatus.OK) {
-//           if (results[0]) {
-//             var city = results[0].address_components[1].long_name + ', ' + results[0].address_components[3].short_name;
-//             placeMarker(event.latLng, city, listen);
-//           }
-// >>>>>>> ab49fc7fd9aa624ea3ec6ca63df85a43bfd39094
-//         }
-//       });
-//     };
-//   }
 function placeMarker(location, address, listen, lat, lon) {
   $('#new-pin').show();
   var infowindow = new google.maps.InfoWindow();
@@ -164,6 +201,7 @@ function placeMarker(location, address, listen, lat, lon) {
 
   markers.push(marker)
   $('#new-pin').on('submit', function() {
+
     if (isSignedIn() == undefined){
       alert('sign in first! :)');
       lock.show();
@@ -174,6 +212,7 @@ function placeMarker(location, address, listen, lat, lon) {
     marker = markers[markers.length - 1];
     marker.journal = journal;
     marker.date = date;
+    console.log(marker);
     custom_data.journal = journal;
     custom_data.date = date;
     console.log(marker);
@@ -200,7 +239,6 @@ function placeMarker(location, address, listen, lat, lon) {
       });
   });
 };
-
 // function fillPersonalPins(){
 //   console.log('filling personal pins');
 //   var options = {
