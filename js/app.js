@@ -58,10 +58,12 @@ $(document).ready(function() {
     // console.log(isSignedIn());
     if (isSignedIn() == true) {
       console.log('is signed in');
+      $('.alert').hide()
       $('#signin').hide();
       $('#signout').show();
       clearMap();
       fillPersonalPins();
+
     } else {
       console.log('not signed in');
       fillExamplePins();
