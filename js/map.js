@@ -4,10 +4,10 @@ var geocoder;
 function initMap() {
 
   geocoder = new google.maps.Geocoder();
-  var latlng = new google.maps.LatLng(39.8282, -98.5795);
+  var latlng = new google.maps.LatLng(20, -30);
   map = new google.maps.Map(document.getElementById('map'), {
     center: latlng,
-    zoom: 4,
+    zoom: 2,
     minZoom:2
   });
 }
