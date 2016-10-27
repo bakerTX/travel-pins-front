@@ -46,7 +46,10 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-.container-fluid{
+/*.container-fluid{
 	background-color: white;
-	font-family: monospace;
+}*/
+
+#wholepage {
+	max-width: 90%;
 }

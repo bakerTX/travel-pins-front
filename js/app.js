@@ -11,8 +11,20 @@ $(document).ready(function() {
   $('#new-pin-button').on('click', function(e) {
     console.log('button clicked');
     e.preventDefault();
-    $('new-pin').toggle();
+    // $('new-pin').toggle();
+    clickNewPin();
   });
+
+  $('#signin').on('click', function(e) {
+    e.preventDefault();
+    lock.show();
+  });
+
+  $('#signout').on('click', function(e) {
+    e.preventDefault();
+    logOut();
+  });
+
   var userProfile;
   var lock = new Auth0Lock('M2kV4wgHdg7ayYwnbYCOGksuu6Gq7SnQ', 'connorzg.auth0.com', {
     auth: {
@@ -21,6 +33,8 @@ $(document).ready(function() {
       }
     }
   });
+
+
   lock.on("authenticated", function(authResult) {
     console.log('lock authenticated');
     lock.getProfile(authResult.idToken, function(error, profile) {
@@ -36,28 +50,7 @@ $(document).ready(function() {
     });
     console.log('should have signed in here');
   });
-  $('#signin').on('click', function(e) {
-    e.preventDefault();
-    lock.show();
-  });
 
-  $('#signout').on('click', function(e) {
-    e.preventDefault();
-    logOut();
-  });
-  function isSignedIn() {
-    var idToken = Lockr.get('idToken');
-    if (null != idToken) {
-      lock.getProfile(idToken, function(err, profile) {
-        if (err) {
-          // Remove expired token (if any) from storage
-          Lockr.rm('idToken');
-          return alert('There was an error getting the profile: ' + err.message);
-        } //authenticated
-      });
-      return true;
-    }
-  };
 
   function checkSignIn() {
     console.log('checking sign in');
@@ -75,6 +68,20 @@ $(document).ready(function() {
     }
   };
   checkSignIn();
+
+  function isSignedIn() {
+    var idToken = Lockr.get('idToken');
+    if (null != idToken) {
+      lock.getProfile(idToken, function(err, profile) {
+        if (err) {
+          // Remove expired token (if any) from storage
+          Lockr.rm('idToken');
+          return alert('There was an error getting the profile: ' + err.message);
+        } //authenticated
+      });
+      return true;
+    }
+  };
 
 }); // doc ready
 
@@ -98,6 +105,49 @@ function fillExamplePins() {
   })
 
 }
+
+function clickNewPin() {
+  map.setOptions({draggableCursor:'crosshair'});
+  var listen = google.maps.event.addListener(map, 'click', geo);
+  function geo(event) {
+    map.setOptions({draggableCursor:'null'});
+    geocoder.geocode({
+      'latLng': event.latLng
+    }, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[0]) {
+          var city = results[0].address_components[1].long_name + ', ' + results[0].address_components[3].short_name;
+          placeMarker(event.latLng, city, listen);
+        }
+      }
+    });
+  };
+}
+
+function placeMarker(location, address, listen) {
+  $('#new-pin').show();
+  var user = Lockr.get('user');
+  var marker = new google.maps.Marker({
+      position: location,
+      address: address,
+      map: map,
+      user: user
+  });
+
+  google.maps.event.removeListener(listen);
+
+  markers.push(marker)
+  $('#new-pin').on('submit', function() {
+    var journal = document.getElementById('journal').value;
+    var date = document.getElementById('date').value;
+    $(this).hide();
+    marker = markers[markers.length - 1];
+    marker.journal = journal;
+    marker.date = date;
+    console.log(marker);
+  });
+};
+
 
 // function fillPersonalPins(){
 //   console.log('filling personal pins');

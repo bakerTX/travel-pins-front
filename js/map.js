@@ -14,6 +14,7 @@ function initMap() {
   });
   // map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
 }
+var markers = []
 
 ///
 // FILLING THE MAP
@@ -87,7 +88,7 @@ function fillPersonalPins(){
 $('#new-pin').on('submit', function(e) {
   e.preventDefault();
   $(this).hide();
-  newPin();
+  // newPin();
 })
 function newPin() {
   var address = $('#search').val();

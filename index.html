@@ -22,7 +22,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Travel Pins</a>
+        <a class="navbar-brand" href="#">Travel <span id='pins-title'>Pins</span></a>
         <img height='60px' src="images/logo.png">
       </div>
 
@@ -40,12 +40,13 @@
   <div id="map"></div>
   <button id="new-pin-button">+</button>
   <div id="info"></div>
+  <div class="container-fluid" id="wholepage">
 
   <!--Create a New Pin-->
   <form id="new-pin" style="display:none">
-    <input type="text" class="" id="search" placeholder="Location">
+    <!-- <input type="text" class="" id="search" placeholder="Location"> -->
     <br />
-    <input type="text" id="date" placeholder="Date">
+    <input type="date" id="date" placeholder="Date">
     <br />
     <textarea id="journal" placeholder="Your journal entry here... "></textarea>
     <br />
@@ -63,17 +64,6 @@
   <ul id="showPhoto"><a href="showPhoto"></a></ul>
 
   </form>
-  <!-- <script>
-    function initMap() {
-      var mapOptions = {
-        center: new google.maps.LatLng(15, 0),
-        zoom: 5,
-        minZoom: 5,
-        maxZoom: 25
-      };
-      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    }
-  </script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script> // the only place where this damn event listener will setup properly
     $('#new-pin-button').on('click', function(e){
@@ -82,6 +72,7 @@
       $('#new-pin').toggle();
     });
   </script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
   <script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdn.auth0.com/js/lock/10.4/lock.min.js"></script>
