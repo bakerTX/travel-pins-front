@@ -171,49 +171,41 @@ function clickNewPin() {
     }, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         if (results[0]) {
+          var lat = results[0].geometry.bounds.f.b;
+          var lon = results[0].geometry.bounds.b.b;
+          console.log(lat, lon);
           var city = results[0].address_components[1].long_name + ', ' + results[0].address_components[3].short_name;
-          placeMarker(event.latLng, city, listen);
+          placeMarker(event.latLng, city, listen, lat, lon);
         }
-      });
-    };
-  }
-
-  function placeMarker(location, address, listen) {
-     // show the new form but we want this to be after a click on the map
-    var user = Lockr.get('user');
-    var marker = new google.maps.Marker({
-        position: location,
-        address: address,
-        map: map,
-        user: user
-    });
-
-    google.maps.event.removeListener(listen);
-
-    markers.push(marker)
-    $('#new-pin').on('submit', function(e) {
-      e.preventDefault();
-      if (isSignedIn()==undefined){
-        alert('sign in first! :)');
-        lock.show();
       }
-      console.log('new-pin submitted');
-      var journal = document.getElementById('journal').value;
-      var date = document.getElementById('date').value;
-      $(this).hide();
-      var ajax_data = {};
-      marker = markers[markers.length - 1];
-      marker.journal = journal;
-      marker.date = date;
-      console.log(marker);
-      ajaxPost(ajax_data);
     });
   };
+};
+
+function placeMarker(location, address, listen, lat, lon) {
+  $('#new-pin').show();
+  var infowindow = new google.maps.InfoWindow();
+  var user = Lockr.get('user');
+  var custom_data = {
+    position: location,
+    address: address,
+    map: map,
+    user: user,
+    lat: lat,
+    lon: lon,
+    infowindow: infowindow
+  }
+  var marker = new google.maps.Marker(custom_data);
 
   google.maps.event.removeListener(listen);
 
   markers.push(marker)
   $('#new-pin').on('submit', function() {
+
+    if (isSignedIn() == undefined){
+      alert('sign in first! :)');
+      lock.show();
+    }
     var journal = document.getElementById('journal').value;
     var date = document.getElementById('date').value;
     $(this).hide();
@@ -221,11 +213,32 @@ function clickNewPin() {
     marker.journal = journal;
     marker.date = date;
     console.log(marker);
+    custom_data.journal = journal;
+    custom_data.date = date;
+    console.log(marker);
+    ajaxPost(custom_data);
+    fillPersonalPins();
+
+    google.maps.event.addListener(marker, 'click', function() {
+       this.infowindow.setContent(
+       `City: ${this.location}<br>
+       Date: ${this.date}<br>
+       Journal: ${this.journal}<br>
+       <span id='delete'>Delete Pin</span>`);
+       infowindow.open(map, this);
+      });
+
+      google.maps.event.addListener(marker, 'click', function(e) {
+        console.log(this);
+        var index = this.index;
+        const thismarker = e.currentTarget;
+        $('#delete').click(function(thismarker) {
+          console.log(thismarker);
+          markers[index].setMap(null);
+        });
+      });
   });
 };
-
-// function fillExamplePins() {}
-
 // function fillPersonalPins(){
 //   console.log('filling personal pins');
 //   var options = {
@@ -243,12 +256,31 @@ function clickNewPin() {
 //   })
 // }
 
-function logOut() {
-  localStorage.removeItem('idToken');
-  localStorage.removeItem('profile');
-  localStorage.removeItem('user');
-  Lockr.rm('idToken');
-  userProfile = null;
-  window.location.href = "/";
+  // function fillPersonalPins(){
+  //   console.log('filling personal pins');
+  //   var options = {
+  //     url: 'http://localhost:3000/pins',
+  //     headers: {
+  //       'Authorization': 'Bearer ' + localStorage.getItem('idToken')
+  //     }
+  //   }
+  //   var request = $.ajax(options)
+  //   request.done(function(response){
+  //     console.log(response);
+  //   })
+  //   request.fail(function(jqXHR, textStatus, errorThrown){
+  //     console.log('fuck');
+  //   })
+  // }
 
-};
+  function logOut() {
+    localStorage.removeItem('idToken');
+    localStorage.removeItem('profile');
+    localStorage.removeItem('user');
+    Lockr.rm('idToken');
+    userProfile = null;
+    window.location.href = "/";
+
+  };
+
+}); // doc ready
