@@ -76,6 +76,82 @@ $(document).ready(function() {
 
 }); // doc ready
 
+function fillExamplePins() {
+  console.log('filling example pins');
+  console.log(map);
+  markerJackson();
+  markerScotland();
+  markerNYC();
+}
+
+function markerJackson() {
+  var infowindow = new google.maps.InfoWindow()
+  var markerJackson = new google.maps.Marker({
+    // Jackson WY
+    position: {lat: 43.4912, lng: -110.81347},
+    map: map,
+    infowindow: infowindow
+  })
+  google.maps.event.addListener(markerJackson, 'click', function(e) {
+    var marker = e.currentTarget;
+    this.infowindow.setContent(
+      `City: Jackson Hole, WY<br>
+      Date: March 2014<br>
+      Journal: Shredded pow pow on the mountain`
+    )
+    infowindow.open(map, markerJackson)
+  });
+}
+
+function markerScotland() {
+  var infowindow = new google.maps.InfoWindow()
+  var markerScotland = new google.maps.Marker({
+    // Scotland
+    position: {lat: 57.8918, lng: -4.3464},
+    map: map,
+    infowindow: infowindow
+  })
+  google.maps.event.addListener(markerScotland, 'click', function(e) {
+    var marker = e.currentTarget;
+    this.infowindow.setContent(
+      `City: Bonar Bridge, Scotland<br>
+      Date: January 19<br>
+      Journal: Locals can be quite test`
+    )
+    infowindow.open(map, markerScotland)
+})
+}
+
+function markerNYC() {
+  var infowindow = new google.maps.InfoWindow()
+  var markerNYC = new google.maps.Marker({
+    // New York City
+    position: {lat: 40.7128, lng: -74.0059},
+    map: map,
+    infowindow: infowindow
+  })
+  google.maps.event.addListener(markerNYC, 'click', function(e) {
+    var marker = e.currentTarget;
+    this.infowindow.setContent(
+      `City: New York City, New York<br>
+      Date: Aug 2015<br>
+      Journal: Spent so much money`
+    )
+    infowindow.open(map, markerNYC)
+  });
+}
+
+
+// google.maps.event.addListener(marker, 'click', function(e) {
+//   console.log(this);
+//   var index = this.index;
+//   const thismarker = e.currentTarget;
+//   $('#delete').click(function(thismarker) {
+//     console.log(thismarker);
+//     markers[index].setMap(null);
+//     });
+// })
+
 function clickNewPin() {
   map.setOptions({draggableCursor:'crosshair'});
   var listen = google.maps.event.addListener(map, 'click', geo);
@@ -118,7 +194,7 @@ function placeMarker(location, address, listen) {
   });
 };
 
-function fillExamplePins() {}
+// function fillExamplePins() {}
 
 // function fillPersonalPins(){
 //   console.log('filling personal pins');
