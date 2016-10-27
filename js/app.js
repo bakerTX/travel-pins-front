@@ -88,13 +88,14 @@ $(document).ready(function() {
 function fillExamplePins() {
   console.log('filling example pins');
   console.log(map);
-  markerJackson();
-  markerScotland();
-  markerNYC();
+  var infowindow = new google.maps.InfoWindow()
+  markerJackson(infowindow);
+  markerScotland(infowindow);
+  markerNYC(infowindow);
 }
 
-function markerJackson() {
-  var infowindow = new google.maps.InfoWindow()
+function markerJackson(infowindow) {
+
   var markerJackson = new google.maps.Marker({
     // Jackson WY
     position: {lat: 43.4912, lng: -110.81347},
@@ -112,8 +113,8 @@ function markerJackson() {
   });
 }
 
-function markerScotland() {
-  var infowindow = new google.maps.InfoWindow()
+function markerScotland(infowindow) {
+  // var infowindow = new google.maps.InfoWindow()
   var markerScotland = new google.maps.Marker({
     // Scotland
     position: {lat: 57.8918, lng: -4.3464},
@@ -131,8 +132,8 @@ function markerScotland() {
 })
 }
 
-function markerNYC() {
-  var infowindow = new google.maps.InfoWindow()
+function markerNYC(infowindow) {
+  // var infowindow = new google.maps.InfoWindow()
   var markerNYC = new google.maps.Marker({
     // New York City
     position: {lat: 40.7128, lng: -74.0059},
@@ -148,6 +149,10 @@ function markerNYC() {
     )
     infowindow.open(map, markerNYC)
   });
+}
+
+function clearMarkers() {
+  setMapOnAll(null);
 }
 
 
