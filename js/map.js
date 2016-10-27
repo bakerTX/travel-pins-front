@@ -15,6 +15,7 @@ function initMap() {
   // map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
 }
 var markers = []
+var examplePins = []
 
 ///
 // FILLING THE MAP

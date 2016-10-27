@@ -53,7 +53,6 @@ $(document).ready(function() {
     console.log('should have signed in here');
   });
 
-
   function checkSignIn() {
     console.log('checking sign in');
     // console.log(isSignedIn());
@@ -61,6 +60,7 @@ $(document).ready(function() {
       console.log('is signed in');
       $('#signin').hide();
       $('#signout').show();
+      clearMap();
       fillPersonalPins();
     } else {
       console.log('not signed in');
@@ -70,6 +70,12 @@ $(document).ready(function() {
     }
   };
   checkSignIn();
+
+  function clearMap(){
+    for (var i = 0; i < examplePins.length; i++){
+      examplePins[i].setMap(null);
+    }
+  }
 
   function isSignedIn() {
     var idToken = Lockr.get('idToken');
@@ -84,6 +90,7 @@ $(document).ready(function() {
       return true;
     }
   };
+
 
 function fillExamplePins() {
   console.log('filling example pins');
@@ -102,6 +109,7 @@ function markerJackson(infowindow) {
     map: map,
     infowindow: infowindow
   })
+  examplePins.push(markerJackson);
   google.maps.event.addListener(markerJackson, 'click', function(e) {
     var marker = e.currentTarget;
     this.infowindow.setContent(
@@ -121,6 +129,7 @@ function markerScotland(infowindow) {
     map: map,
     infowindow: infowindow
   })
+  examplePins.push(markerScotland)
   google.maps.event.addListener(markerScotland, 'click', function(e) {
     var marker = e.currentTarget;
     this.infowindow.setContent(
@@ -140,6 +149,7 @@ function markerNYC(infowindow) {
     map: map,
     infowindow: infowindow
   })
+  examplePins.push(markerNYC);
   google.maps.event.addListener(markerNYC, 'click', function(e) {
     var marker = e.currentTarget;
     this.infowindow.setContent(
