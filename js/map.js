@@ -84,12 +84,17 @@ function fillPersonalPins(){
 }
 ///
 
-// POSTING A NEW PIN
-$('#new-pin').on('submit', function(e) {
-  e.preventDefault();
-  $(this).hide();
-  // newPin();
-})
+// // POSTING A NEW PIN
+// $('#new-pin').on('submit', function(e) {
+//   console.log('new-pin submitted');
+//   if (isSignedIn()==undefined){
+//     signin();
+//   } else{
+//     e.preventDefault();
+//     $(this).hide();
+//     // newPin();
+//   }
+// })
 function newPin() {
   var address = $('#search').val();
   var journal = document.getElementById('journal').value;

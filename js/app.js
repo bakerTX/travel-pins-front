@@ -84,96 +84,105 @@ $(document).ready(function() {
     }
   };
 
-}); // doc ready
 
 
-function fillExamplePins() {
-  console.log('filling example pins');
-  console.log(map);
-  var marker = new google.maps.Marker({
-    // Jackson WY
-    position: {lat: 43.4912, lng: -110.81347},
-    map: map
-  })
-  var marker = new google.maps.Marker({
-    // New York City
-    position: {lat: 40.7128, lng: -74.0059},
-    map: map
-  })
-  var marker = new google.maps.Marker({
-    // Scotland
-    position: {lat: 56.4907, lng: -4.2026},
-    map: map
-  })
 
-}
+  function fillExamplePins() {
+    console.log('filling example pins');
+    console.log(map);
+    var marker = new google.maps.Marker({
+      // Jackson WY
+      position: {lat: 43.4912, lng: -110.81347},
+      map: map
+    })
+    var marker = new google.maps.Marker({
+      // New York City
+      position: {lat: 40.7128, lng: -74.0059},
+      map: map
+    })
+    var marker = new google.maps.Marker({
+      // Scotland
+      position: {lat: 56.4907, lng: -4.2026},
+      map: map
+    })
 
-function clickNewPin() {
-  map.setOptions({draggableCursor:'crosshair'});
-  var listen = google.maps.event.addListener(map, 'click', geo);
-  function geo(event) {
-    map.setOptions({draggableCursor:'null'});
-    geocoder.geocode({
-      'latLng': event.latLng
-    }, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        if (results[0]) {
-          var city = results[0].address_components[1].long_name + ', ' + results[0].address_components[3].short_name;
-          placeMarker(event.latLng, city, listen);
+  }
+
+  function clickNewPin() {
+    map.setOptions({draggableCursor:'crosshair'});
+    var listen = google.maps.event.addListener(map, 'click', geo);
+    function geo(event) {
+      map.setOptions({draggableCursor:'null'});
+      geocoder.geocode({
+        'latLng': event.latLng
+      }, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          if (results[0]) {
+            var city = results[0].address_components[1].long_name + ', ' + results[0].address_components[3].short_name;
+            placeMarker(event.latLng, city, listen);
+          }
         }
+      });
+    };
+  }
+
+  function placeMarker(location, address, listen) {
+    $('#new-pin').show();
+    var user = Lockr.get('user');
+    var marker = new google.maps.Marker({
+        position: location,
+        address: address,
+        map: map,
+        user: user
+    });
+
+    google.maps.event.removeListener(listen);
+
+    markers.push(marker)
+    $('#new-pin').on('submit', function(e) {
+      e.preventDefault();
+      if (isSignedIn()==undefined){
+        alert('sign in first! :)');
       }
+      console.log('new-pin submitted');
+      var journal = document.getElementById('journal').value;
+      var date = document.getElementById('date').value;
+      $(this).hide();
+      var ajax_data = {};
+      marker = markers[markers.length - 1];
+      marker.journal = journal;
+      marker.date = date;
+      console.log(marker);
+      ajaxPost(ajax_data);
     });
   };
-}
-
-function placeMarker(location, address, listen) {
-  $('#new-pin').show();
-  var user = Lockr.get('user');
-  var marker = new google.maps.Marker({
-      position: location,
-      address: address,
-      map: map,
-      user: user
-  });
-
-  google.maps.event.removeListener(listen);
-
-  markers.push(marker)
-  $('#new-pin').on('submit', function() {
-    var journal = document.getElementById('journal').value;
-    var date = document.getElementById('date').value;
-    $(this).hide();
-    marker = markers[markers.length - 1];
-    marker.journal = journal;
-    marker.date = date;
-    console.log(marker);
-  });
-};
 
 
-// function fillPersonalPins(){
-//   console.log('filling personal pins');
-//   var options = {
-//     url: 'http://localhost:3000/pins',
-//     headers: {
-//       'Authorization': 'Bearer ' + localStorage.getItem('idToken')
-//     }
-//   }
-//   var request = $.ajax(options)
-//   request.done(function(response){
-//     console.log(response);
-//   })
-//   request.fail(function(jqXHR, textStatus, errorThrown){
-//     console.log('fuck');
-//   })
-// }
+  // function fillPersonalPins(){
+  //   console.log('filling personal pins');
+  //   var options = {
+  //     url: 'http://localhost:3000/pins',
+  //     headers: {
+  //       'Authorization': 'Bearer ' + localStorage.getItem('idToken')
+  //     }
+  //   }
+  //   var request = $.ajax(options)
+  //   request.done(function(response){
+  //     console.log(response);
+  //   })
+  //   request.fail(function(jqXHR, textStatus, errorThrown){
+  //     console.log('fuck');
+  //   })
+  // }
 
-function logOut() {
-  localStorage.removeItem('idToken');
-  localStorage.removeItem('profile');
-  localStorage.removeItem('user');
-  Lockr.rm('idToken');
-  userProfile = null;
-  window.location.href = "/";
+  function logOut() {
+    localStorage.removeItem('idToken');
+    localStorage.removeItem('profile');
+    localStorage.removeItem('user');
+    Lockr.rm('idToken');
+    userProfile = null;
+    window.location.href = "/";
 
-};
+  };
+
+}); // doc ready
