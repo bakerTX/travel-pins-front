@@ -8,12 +8,12 @@ input {
   height:70%;
   font-size:200%;
   background-color:transparent;
-  border: none;
-  border-bottom: 2px solid black;
-  padding:2%;
+  border: 1px solid black;
+  padding: 2px;
   width: 50%;
   font-family: monospace;
 }
+
 button {
   height:70px;
   font-size:200%;
