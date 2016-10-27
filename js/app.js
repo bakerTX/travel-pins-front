@@ -150,17 +150,6 @@ function markerNYC() {
   });
 }
 
-
-// google.maps.event.addListener(marker, 'click', function(e) {
-//   console.log(this);
-//   var index = this.index;
-//   const thismarker = e.currentTarget;
-//   $('#delete').click(function(thismarker) {
-//     console.log(thismarker);
-//     markers[index].setMap(null);
-//     });
-// })
-
 function clickNewPin() {
   map.setOptions({draggableCursor:'crosshair'});
   var listen = google.maps.event.addListener(map, 'click', geo);

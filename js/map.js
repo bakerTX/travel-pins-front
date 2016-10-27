@@ -9,10 +9,7 @@ function initMap() {
     center: latlng,
     zoom: 4,
     minZoom:2
-    // disableDefaultUI: true,
-    // styles: styles
   });
-  // map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
 }
 var markers = []
 
@@ -80,63 +77,7 @@ function fillPersonalPins(){
   request.fail(function(jqXHR, textStatus, errorThrown){
     console.log('errorThrown: ', errorThrown);
   })
-
 }
-///
-
-
-// function newPin() {
-//   var address = $('#search').val();
-//   var journal = document.getElementById('journal').value;
-//   var date = document.getElementById('date').value;
-//   // var user = localStorage.getItem('user');
-//   var user = Lockr.get('user');
-//   geocoder.geocode({
-//     address: address
-//   }, function(results, status) {
-//     var custom_data = {}
-//     custom_data.user = user;
-//     custom_data.journal = journal;
-//     custom_data.date = date;
-//     custom_data.address = results[0].formatted_address;
-//     custom_data.lon = results[0].geometry.bounds.b.b;
-//     custom_data.lat = results[0].geometry.bounds.f.b;
-//     // *****
-//     // POSTING TO DB
-//     ajaxPost(custom_data);
-//     //****
-//     if (status == 'OK') {
-//       map.setCenter(results[0].geometry.location);
-//       var marker = new google.maps.Marker({
-//         map: map,
-//         position: results[0].geometry.location,
-//         custom_data: custom_data
-//       });
-//
-//       marker.addListener('click', function() {
-//         // map.setZoom(8);
-//         // map.setCenter(marker.getPosition());
-//         console.log(this.custom_data);
-//       });
-//     } else {
-//       alert('Geocode was not successful for the following reason: ' + status);
-//     }
-//       $('#address').val('');
-//   });
-// }
-
-// POSTING A NEW PIN
-// $('#new-pin').on('submit', function(e) {
-//   console.log('new-pin submitted');
-//   if (isSignedIn()==undefined){
-//     alert('please sign in first!');
-//     signin();
-//   } else{
-//     e.preventDefault();
-//     $(this).hide();
-//     // newPin();
-//   }
-// })
 
 function ajaxPost(custom_data){
   console.log(custom_data);
