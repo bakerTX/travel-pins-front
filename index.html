@@ -22,7 +22,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Travel Pins</a>
+        <a class="navbar-brand" href="#">Travel <span id='pins-title'>Pins</span></a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -39,6 +39,7 @@
   <div id="map"></div>
   <button id="new-pin-button">+</button>
   <div id="info"></div>
+  <div class="container-fluid" id="wholepage">
 
   <!--Create a New Pin-->
   <form id="new-pin" style="display:none">
@@ -61,6 +62,7 @@
   <ul id="showPhoto"></ul>
 
   </form>
+  </div>
   <script>
     function initMap() {
       var mapOptions = {
@@ -79,6 +81,7 @@
       $('#new-pin').toggle();
     });
   </script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
   <script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdn.auth0.com/js/lock/10.4/lock.min.js"></script>
