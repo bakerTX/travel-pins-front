@@ -1,9 +1,20 @@
 $(document).ready(function() {
-  $('#new-pin-button').on('click', function(e) {
-    console.log('button clicked');
+  $('#cityLookup').on('submit',function(e){
     e.preventDefault();
-    // $('new-pin').toggle();
+    window.setTimeout(function(){
+      window.scrollTo(0,525);
+
+    }, 900);
+
+
+  })
+  $('#new-pin-button').on('click', function(e) {
+
+    console.log('button clicked');
+    $("#new-pin-button").css('cursor: crosshair');
+    e.preventDefault();
     clickNewPin();
+
   });
 
   $('#signin').on('click', function(e) {
@@ -73,8 +84,6 @@ $(document).ready(function() {
       return true;
     }
   };
-
-}); // doc ready
 
 function fillExamplePins() {
   console.log('filling example pins');
@@ -165,20 +174,41 @@ function clickNewPin() {
           var city = results[0].address_components[1].long_name + ', ' + results[0].address_components[3].short_name;
           placeMarker(event.latLng, city, listen);
         }
+      });
+    };
+  }
+
+  function placeMarker(location, address, listen) {
+     // show the new form but we want this to be after a click on the map
+    var user = Lockr.get('user');
+    var marker = new google.maps.Marker({
+        position: location,
+        address: address,
+        map: map,
+        user: user
+    });
+
+    google.maps.event.removeListener(listen);
+
+    markers.push(marker)
+    $('#new-pin').on('submit', function(e) {
+      e.preventDefault();
+      if (isSignedIn()==undefined){
+        alert('sign in first! :)');
+        lock.show();
       }
+      console.log('new-pin submitted');
+      var journal = document.getElementById('journal').value;
+      var date = document.getElementById('date').value;
+      $(this).hide();
+      var ajax_data = {};
+      marker = markers[markers.length - 1];
+      marker.journal = journal;
+      marker.date = date;
+      console.log(marker);
+      ajaxPost(ajax_data);
     });
   };
-}
-
-function placeMarker(location, address, listen) {
-  $('#new-pin').show();
-  var user = Lockr.get('user');
-  var marker = new google.maps.Marker({
-      position: location,
-      address: address,
-      map: map,
-      user: user
-  });
 
   google.maps.event.removeListener(listen);
 
