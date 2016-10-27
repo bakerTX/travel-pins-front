@@ -7,7 +7,8 @@ function initMap() {
   var latlng = new google.maps.LatLng(39.8282, -98.5795);
   map = new google.maps.Map(document.getElementById('map'), {
     center: latlng,
-    zoom: 4
+    zoom: 4,
+    minZoom:2
     // disableDefaultUI: true,
     // styles: styles
   });
@@ -31,7 +32,6 @@ function fillPersonalPins(){
     console.log(response);
     var infowindow = new google.maps.InfoWindow()
     for (var i = 0; i < response.length; i++){
-      console.log(response[i].lat);
       var marker = new google.maps.Marker({
         map: map,
         position: {lat: response[i].lat, lng: response[i].lon},
@@ -42,38 +42,39 @@ function fillPersonalPins(){
         infowindow: infowindow,
         _id: response[i]._id,
         index: i
+
       });
-
       markers.push(marker);
-      google.maps.event.addListener(marker, 'click', function() {
-       this.infowindow.setContent(
-       `City: ${this.location}<br>
-       Date: ${this.date}<br>
-       Journal: ${this.journal}<br>
-       <span id='delete'>Delete Pin</span>`);
-       infowindow.open(map, this);
-    });
 
-      google.maps.event.addListener(marker, 'click', function(e) {
+      google.maps.event.addListener(marker, 'click', function() {
+         console.log(this);
+         this.infowindow.setContent(
+         `City: ${this.location}<br>
+         Date: ${this.date}<br>
+         Journal: ${this.journal}
+         <span id='delete'>Delete Pin</span>`);
+         infowindow.open(map, this);
+       });
+       google.maps.event.addListener(marker, 'click', function(e) {
         console.log(this);
         var index = this.index;
         const thismarker = e.currentTarget;
         $('#delete').click(function(thismarker) {
           console.log(thismarker);
           markers[index].setMap(null);
-          console.log(markers[index]);
+          var options = {
+            url: 'http://localhost:3000/pins/'+markers[index]._id,
+            method: 'DELETE',
+            headers: {
+              'Authorization': 'Bearer ' + Lockr.get('idToken')
+            }
+          }
+          var request = $.ajax(options);
+          request.done(function(response){
+            console.log('deleted');
           });
+        });
     })
-
-      // marker.addListener('click', function() {
-      //   var infowindow = new google.maps.InfoWindow({
-      //     content: `City: ${this.location}<br>
-      //     Date: ${this.date}<br>
-      //     Journal: ${this.journal}`
-      //   });
-      //   console.log(this.date);
-      //   infowindow.open(map, this);
-      // });
     }
   })
   request.fail(function(jqXHR, textStatus, errorThrown){
@@ -83,12 +84,7 @@ function fillPersonalPins(){
 }
 ///
 
-// POSTING A NEW PIN
-$('#new-pin').on('submit', function(e) {
-  e.preventDefault();
-  $(this).hide();
-  // newPin();
-})
+
 // function newPin() {
 //   var address = $('#search').val();
 //   var journal = document.getElementById('journal').value;
@@ -129,6 +125,18 @@ $('#new-pin').on('submit', function(e) {
 //   });
 // }
 
+// POSTING A NEW PIN
+// $('#new-pin').on('submit', function(e) {
+//   console.log('new-pin submitted');
+//   if (isSignedIn()==undefined){
+//     alert('please sign in first!');
+//     signin();
+//   } else{
+//     e.preventDefault();
+//     $(this).hide();
+//     // newPin();
+//   }
+// })
 
 function ajaxPost(custom_data){
   console.log(custom_data);

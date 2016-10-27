@@ -11,13 +11,13 @@ body {
 
 #map {
    height: 490px;
-   width: 90%;
+
+   width: 70%;
+
    margin: 0 auto;
  }
 
-form {
- margin-bottom: 50px;
-}
+
 
 #new-pin-button {
  z-index: 200005;
@@ -32,11 +32,7 @@ form {
  padding:0.2em 0.7em;
 }
 
-#new-pin {
-  position:absolute;
-  top: 2.4em;
-  right:3em;
-}
+
 .navbar {
  margin-bottom:0;
 }

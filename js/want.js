@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('form').on('submit', function(e){
+  $('#cityLookup').on('submit', function(e){
     e.preventDefault();
     var query = $('#searchPlace').val(); // query comes from the word typed into the search field
     $('#showPhoto').empty();
@@ -37,6 +37,7 @@ var loadFlicks = function(query){ // query == json?
 
 function jsonFlickrApi(jsonObject){
   console.log(jsonObject);
+  //There is a bug in the line of code below.
   $.each( jsonObject.photos.photo, function( i, gp ) {
 
   var farmId = gp.farm;
@@ -48,7 +49,5 @@ function jsonFlickrApi(jsonObject){
   $li.append('<img src="https://farm' + farmId + '.staticflickr.com/' + serverId + '/' + id + '_' + secret + '_m.jpg"/>');
   $('#showPhoto').append($li);
   });
-
-
 
 };
