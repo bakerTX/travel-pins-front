@@ -98,7 +98,7 @@ $(document).ready(function() {
 
 function fillExamplePins() {
   console.log('filling example pins');
-  console.log(map);
+  // console.log(map);
   var infowindow = new google.maps.InfoWindow()
   markerJackson(infowindow);
   markerScotland(infowindow);
@@ -201,8 +201,10 @@ function placeMarker(location, address, listen, lat, lon) {
     user: user,
     lat: lat,
     lon: lon,
-    infowindow: infowindow
+    infowindow: infowindow,
+    visible: false
   }
+
   var marker = new google.maps.Marker(custom_data);
 
   google.maps.event.removeListener(listen);
@@ -220,10 +222,10 @@ function placeMarker(location, address, listen, lat, lon) {
     marker = markers[markers.length - 1];
     marker.journal = journal;
     marker.date = date;
-    console.log(marker);
+    // console.log(marker);
     custom_data.journal = journal;
     custom_data.date = date;
-    console.log(marker);
+    // console.log(marker);
     ajaxPost(custom_data);
     fillPersonalPins();
 
@@ -237,11 +239,11 @@ function placeMarker(location, address, listen, lat, lon) {
       });
 
       google.maps.event.addListener(marker, 'click', function(e) {
-        console.log(this);
+        // console.log(this);
         var index = this.index;
         const thismarker = e.currentTarget;
         $('#delete').click(function(thismarker) {
-          console.log(thismarker);
+          // console.log(thismarker);
           markers[index].setMap(null);
         });
       });

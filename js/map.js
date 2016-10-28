@@ -54,7 +54,6 @@ function fillPersonalPins(){
          infowindow.open(map, this);
        });
        google.maps.event.addListener(marker, 'click', function(e) {
-        console.log(this);
         var index = this.index;
         const thismarker = e.currentTarget;
         $('#delete').click(function(thismarker) {
