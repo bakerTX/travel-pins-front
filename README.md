@@ -87,6 +87,7 @@ function jsonFlickrApi(jsonObject){
   color: black;
   text-align: center;
 }
+```
 ## next steps / next features
 Upcoming Features
 Broaden the two major functionalities of the website
