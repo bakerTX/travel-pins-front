@@ -45,6 +45,23 @@ $(document).ready(function() {
     });
   });
 
+  function checkSignIn() {
+    // console.log(isSignedIn());
+    if (isSignedIn() == true) {
+      $('.alert').hide()
+      $('#signin').hide();
+      $('#signout').show();
+      clearMap();
+      $('#new-pin-button').show();
+      fillPersonalPins();
+
+    } else {
+      fillExamplePins();
+      $('#new-pin-button').hide();
+      $('#signin').show();
+      $('#signout').hide();
+    }
+  };
   checkSignIn();
 
   function clearMap() {
@@ -224,8 +241,6 @@ $(document).ready(function() {
       });
     });
   };
-});
-
 
   function logOut() {
     localStorage.removeItem('idToken');
@@ -235,20 +250,5 @@ $(document).ready(function() {
     userProfile = null;
     window.location.href = "/";
   };
-function checkSignIn() {
-  // console.log(isSignedIn());
-  if (isSignedIn() == true) {
-    $('.alert').hide()
-    $('#signin').hide();
-    $('#signout').show();
-    clearMap();
-    $('#new-pin-button').show();
-    fillPersonalPins();
 
-  } else {
-    fillExamplePins();
-    $('#new-pin-button').hide();
-    $('#signin').show();
-    $('#signout').hide();
-  }
-};
+});
