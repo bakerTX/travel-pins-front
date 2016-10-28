@@ -1,4 +1,4 @@
-# travel-pins-front ![Image of Logo](/images/logo.png)
+# travel-pins-front
 ![Image of Landing page](/images/site6.png)
 ## project history
 Here is some history of the project
