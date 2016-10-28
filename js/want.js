@@ -8,11 +8,9 @@ $(document).ready(function() {
 });
 
 
-var loadFlicks = function(query){ // query == json?
-  console.log('load flicks is running');
-  console.log(query);
+var loadFlicks = function(query){
   $.ajax({
-    url: 'https://api.flickr.com/services/rest/?method=flickr.photos.search&text='+query+'&format=json', // replace with json? replace with query?
+    url: 'https://api.flickr.com/services/rest/?method=flickr.photos.search&text='+query+'&format=json',
     jsonpCallback: "jsonFlickrApi",
     dataType: 'jsonp',
     data: {
@@ -36,8 +34,6 @@ var loadFlicks = function(query){ // query == json?
 }
 
 function jsonFlickrApi(jsonObject){
-  console.log(jsonObject);
-  //There is a bug in the line of code below.
   $.each( jsonObject.photos.photo, function( i, gp ) {
 
   var farmId = gp.farm;
@@ -49,5 +45,4 @@ function jsonFlickrApi(jsonObject){
   $li.append('<img src="https://farm' + farmId + '.staticflickr.com/' + serverId + '/' + id + '_' + secret + '_m.jpg"/>');
   $('#showPhoto').append($li);
   });
-
 };

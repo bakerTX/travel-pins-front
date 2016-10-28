@@ -189,7 +189,8 @@ $(document).ready(function() {
       user: user,
       lat: lat,
       lon: lon,
-      infowindow: infowindow
+      infowindow: infowindow,
+      // visible: falsecod
     }
     var marker = new google.maps.Marker(custom_data);
     custom_data.marker = marker;

@@ -12,9 +12,7 @@ body {
 
 #map {
    height: 490px;
-
    width: 70%;
-
    margin: 0 auto;
    margin-top: 20px;
  }
@@ -32,7 +30,6 @@ body {
  background-color:#f34c44;
  border: none;
  border-radius: 3px;
- /*padding:0.2em 0.7em;*/
  padding: 0 25px;
 }
 
@@ -69,9 +66,3 @@ body {
 #tutorial {
   font-family: monospace;
 }
-
-/*.btn-success:hover {
-  color: grey !important;
-  background-color: white;
-  border: solid2px #4cae4c !important;
-}*/
