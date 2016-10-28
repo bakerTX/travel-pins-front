@@ -65,6 +65,28 @@ function jsonFlickrApi(jsonObject){
   });
 };
 ```
+![Image of New Pin Form](/images/feature1.png)
+#### New Pin Form
+```
+#new-pin{
+  padding: 8px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.86);
+  position:absolute;
+  top: 10.4em;
+  right:2.4em;
+}
+
+#new-pin input{
+  text-align: center;
+  border: none;
+  border-bottom: 2px solid black;
+  width: 258px;
+  margin: 2px;
+  font-family: monospace;
+  color: black;
+  text-align: center;
+}
 ## next steps / next features
 Upcoming Features
 Broaden the two major functionalities of the website
