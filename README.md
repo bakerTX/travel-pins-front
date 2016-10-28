@@ -2,8 +2,20 @@
 ![Image of Landing page v6.0](/images/site6.png)
 
 ## example code blocks
+
+#### Google Maps API
 ```
-console.log('hello world!');
+<script>
+  function initMap() {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(20, -30);
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: latlng,
+      zoom: 2,
+      minZoom:2
+    });
+  }
+</script>
 ```
 #### Flickr API:
 ```
