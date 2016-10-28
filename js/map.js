@@ -14,7 +14,6 @@ function initMap() {
 var markers = []
 var examplePins = []
 
-///
 // FILLING THE MAP
 function fillPersonalPins(){
   var options = {
@@ -37,20 +36,21 @@ function fillPersonalPins(){
         infowindow: infowindow,
         _id: response[i]._id,
         index: i
-
       });
       markers.push(marker);
-      google.maps.event.addListener(marker, 'click', function() {
-         this.infowindow.setContent(
-         `City: ${this.location}<br>
-         Date: ${this.date}<br>
-         Journal: ${this.journal}
-         <span id='delete'>Delete Pin</span>`);
-         infowindow.open(map, this);
-       });
-       google.maps.event.addListener(marker, 'click', function(e) {
-        var index = this.index;
+      google.maps.event.addListener(marker, 'click', function(e) {
+        // sets the Content of the infoWindow
+        this.infowindow.setContent(
+        `City: ${this.location}<br>
+        Date: ${this.date}<br>
+        Journal: ${this.journal}
+        <span id='delete'>Delete Pin</span>`);
+        infowindow.open(map, this);
+                                //
+        var index = this.index; // tracker of marker's position in global array of markers
+                                // for accessibility within the following nested listener
         const thismarker = e.currentTarget;
+        // Delete Pin button contained inside info-window.
         $('#delete').click(function(thismarker) {
           console.log(thismarker);
           markers[index].setMap(null);
@@ -89,12 +89,9 @@ function ajaxPost(custom_data){
       user: custom_data.user,
       lat: custom_data.lat,
       lon: custom_data.lon
-      // potentially add other defining information here
     }
   }
-  console.log('request');
   var request = $.ajax(options);
-  console.log('after');
   request.done(function(response){
     console.log('post was successful');
     console.log(response);
