@@ -88,7 +88,8 @@ function jsonFlickrApi(jsonObject){
   text-align: center;
 }
 ```
-## next steps / next features
+---
+## Next steps / Next Features
 Upcoming Features
 Broaden the two major functionalities of the website
 
@@ -113,6 +114,8 @@ Broaden the two major functionalities of the website
 * ### Completely refactor the codebase from scratch?
 
 * ### _Sell app to HomeAway, become rich_
+
+---
 
 ## project history
 ![Image of Site v1.0](/images/site1)
