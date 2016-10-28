@@ -1,12 +1,5 @@
 # travel pins
 ![Image of Landing page v6.0](/images/site6.png)
-## project history
-![Image of Site v1.0](/images/site1)
-![Image of Site v2.0](/images/site2.png)
-![Image of Site v3.0](/images/site3.png)
-![Image of Site v4.0](/images/site4.png)
-![Image of Site v5.0](/images/site5.png)
-
 
 ## example code blocks
 ```
@@ -83,5 +76,12 @@ Broaden the two major functionalities of the website
 * ### Bug Extermination
 * ### Completely refactor the codebase from scratch?
 * ### _Sell app to HomeAway, become rich_
+
+## project history
+![Image of Site v1.0](/images/site1)
+![Image of Site v2.0](/images/site2.png)
+![Image of Site v3.0](/images/site3.png)
+![Image of Site v4.0](/images/site4.png)
+![Image of Site v5.0](/images/site5.png)
 
 
