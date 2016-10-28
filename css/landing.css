@@ -1,25 +1,19 @@
+/*Liquid layout fundamentals*/
 body {
-  /*Liquid layout fundamentals*/
   width: 100%;
   margin: 0 auto;
   position:relative;
   background-color: #f8f8f8;
 }
 
-
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
-
 #map {
    height: 490px;
-
    width: 70%;
-
    margin: 0 auto;
    margin-top: 20px;
  }
-
-
 
 #new-pin-button {
  display: none;
@@ -32,11 +26,8 @@ body {
  background-color:#f34c44;
  border: none;
  border-radius: 3px;
- /*padding:0.2em 0.7em;*/
  padding: 0 25px;
 }
-
-
 
 .close span {
   position: relative;

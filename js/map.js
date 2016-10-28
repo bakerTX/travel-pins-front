@@ -1,38 +1,28 @@
 var map;
 var geocoder;
+var markers = [];
+var examplePins = [];
 
-function initMap() {
-
-  geocoder = new google.maps.Geocoder();
-  var latlng = new google.maps.LatLng(20, -30);
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: latlng,
-    zoom: 2,
-    minZoom:2
-  });
-}
-var markers = []
-var examplePins = []
-
-///
 // FILLING THE MAP
-function fillPersonalPins(){
-  console.log('fillingpersonal');
+function fillPersonalPins() {
   // ON THIS MAP, FILL WITH PREVIOUSLY STORED PINS
   var options = {
-    url: 'http://localhost:3000/pins',
+    url: 'https://quiet-meadow-73921.herokuapp.com/pins',
     headers: {
       'Authorization': 'Bearer ' + Lockr.get('idToken')
     }
-  }
+  };
   var request = $.ajax(options);
-  request.done(function(response){
+  request.done(function(response) {
     console.log(response);
     var infowindow = new google.maps.InfoWindow()
-    for (var i = 0; i < response.length; i++){
+    for (var i = 0; i < response.length; i++) {
       var marker = new google.maps.Marker({
         map: map,
-        position: {lat: response[i].lat, lng: response[i].lon},
+        position: {
+          lat: response[i].lat,
+          lng: response[i].lon
+        },
         journal: response[i].journal,
         date: response[i].date,
         location: response[i].location,
@@ -40,20 +30,22 @@ function fillPersonalPins(){
         infowindow: infowindow,
         _id: response[i]._id,
         index: i
-
       });
       markers.push(marker);
 
       google.maps.event.addListener(marker, 'click', function() {
-         console.log(this);
-         this.infowindow.setContent(
-         `City: ${this.location}<br>
-         Date: ${this.date}<br>
-         Journal: ${this.journal}
-         <span id='delete'>Delete Pin</span>`);
-         infowindow.open(map, this);
-       });
-       google.maps.event.addListener(marker, 'click', function(e) {
+        console.log(this);
+        this.infowindow.setContent(
+          `City: ${this.location}<br>
+           Date: ${this.date}<br>
+           Journal: ${this.journal}
+           <hr>
+           <span style='font-weight: bold' id='delete'>Delete Pin</span>`
+         );
+        infowindow.open(map, this);
+      });
+
+      google.maps.event.addListener(marker, 'click', function(e) {
         console.log(this);
         var index = this.index;
         const thismarker = e.currentTarget;
@@ -61,29 +53,26 @@ function fillPersonalPins(){
           console.log(thismarker);
           markers[index].setMap(null);
           var options = {
-            url: 'http://localhost:3000/pins/'+markers[index]._id,
+            url: 'https://quiet-meadow-73921.herokuapp.com/pins/' + markers[index]._id,
             method: 'DELETE',
             headers: {
               'Authorization': 'Bearer ' + Lockr.get('idToken')
             }
           }
           var request = $.ajax(options);
-          request.done(function(response){
-            console.log('deleted');
-          });
         });
-    })
-    }
-  })
-  request.fail(function(jqXHR, textStatus, errorThrown){
+      });
+    };
+  });
+  request.fail(function(jqXHR, textStatus, errorThrown) {
     console.log('errorThrown: ', errorThrown);
-  })
-}
+  });
+};
 
-function ajaxPost(custom_data){
+function ajaxPost(custom_data) {
   console.log(custom_data);
   var options = {
-    url: 'http://localhost:3000/pins',
+    url: 'https://quiet-meadow-73921.herokuapp.com/pins',
     method: 'POST',
     headers: {
       'Authorization': 'Bearer ' + Lockr.get('idToken')
@@ -97,16 +86,10 @@ function ajaxPost(custom_data){
       lon: custom_data.lon
       // potentially add other defining information here
     }
-  }
-  console.log('request');
-  var request = $.ajax(options);
-  console.log('after');
-  request.done(function(response){
-    console.log('post was successful');
-    console.log(response);
+  };
 
-  })
-  request.fail(function(jqXHR, textStatus, errorThrown){
+  var request = $.ajax(options);
+  request.fail(function(jqXHR, textStatus, errorThrown) {
     console.log('errorThrown: ', errorThrown);
   });
 };
