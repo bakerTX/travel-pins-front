@@ -88,7 +88,7 @@ $(document).ready(function() {
         if (err) {
           // Remove expired token (if any) from storage
           Lockr.rm('idToken');
-          return alert('There was an error getting the profile: ' + err.message);
+          return console.log('There was an error getting the profile: ' + err.message);
         } //authenticated
       });
       return true;
@@ -233,8 +233,9 @@ function placeMarker(location, address, listen, lat, lon) {
        this.infowindow.setContent(
        `City: ${this.location}<br>
        Date: ${this.date}<br>
-       Journal: ${this.journal}<br>
-       <span id='delete'>Delete Pin</span>`);
+       Journal: ${this.journal}
+       <hr>
+       <span style='font-weight:bold' id='delete'>Delete Pin</span>`);
        infowindow.open(map, this);
       });
 

@@ -20,7 +20,7 @@ function fillPersonalPins(){
   console.log('fillingpersonal');
   // ON THIS MAP, FILL WITH PREVIOUSLY STORED PINS
   var options = {
-    url: 'http://localhost:3000/pins',
+    url: 'https://quiet-meadow-73921.herokuapp.com/pins',
     headers: {
       'Authorization': 'Bearer ' + Lockr.get('idToken')
     }
@@ -50,7 +50,8 @@ function fillPersonalPins(){
          `City: ${this.location}<br>
          Date: ${this.date}<br>
          Journal: ${this.journal}
-         <span id='delete'>Delete Pin</span>`);
+         <hr>
+         <span style='font-weight:bold' id='delete'>Delete Pin</span>`);
          infowindow.open(map, this);
        });
        google.maps.event.addListener(marker, 'click', function(e) {
@@ -60,7 +61,7 @@ function fillPersonalPins(){
           console.log(thismarker);
           markers[index].setMap(null);
           var options = {
-            url: 'http://localhost:3000/pins/'+markers[index]._id,
+            url: 'https://quiet-meadow-73921.herokuapp.com/pins/'+markers[index]._id,
             method: 'DELETE',
             headers: {
               'Authorization': 'Bearer ' + Lockr.get('idToken')
@@ -82,7 +83,7 @@ function fillPersonalPins(){
 function ajaxPost(custom_data){
   console.log(custom_data);
   var options = {
-    url: 'http://localhost:3000/pins',
+    url: 'https://quiet-meadow-73921.herokuapp.com/pins',
     method: 'POST',
     headers: {
       'Authorization': 'Bearer ' + Lockr.get('idToken')
