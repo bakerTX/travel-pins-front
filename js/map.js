@@ -12,9 +12,9 @@ function fillPersonalPins() {
       'Authorization': 'Bearer ' + Lockr.get('idToken')
     }
   };
+
   var request = $.ajax(options);
-  request.done(function(response) {
-    console.log(response);
+  request.done(function(response){
     var infowindow = new google.maps.InfoWindow()
     for (var i = 0; i < response.length; i++) {
       var marker = new google.maps.Marker({
@@ -34,23 +34,21 @@ function fillPersonalPins() {
       markers.push(marker);
 
       google.maps.event.addListener(marker, 'click', function() {
-        console.log(this);
-        this.infowindow.setContent(
-          `City: ${this.location}<br>
-           Date: ${this.date}<br>
-           Journal: ${this.journal}
-           <hr>
-           <span style='font-weight: bold' id='delete'>Delete Pin</span>`
-         );
-        infowindow.open(map, this);
-      });
+         this.infowindow.setContent(
+         `City: ${this.location}<br>
+         Date: ${this.date}<br>
+         Journal: ${this.journal}
+         <hr>
+         <span style='bold' id='delete'>Delete Pin</span>`);
+         infowindow.open(map, this);
+       });
 
-      google.maps.event.addListener(marker, 'click', function(e) {
-        console.log(this);
+       google.maps.event.addListener(marker, 'click', function(e) {
         var index = this.index;
-        const thismarker = e.currentTarget;
-        $('#delete').click(function(thismarker) {
+        const thismarker = this
+        $('#delete').click(function() {
           console.log(thismarker);
+          thismarker.setMap(null);
           markers[index].setMap(null);
           var options = {
             url: 'https://quiet-meadow-73921.herokuapp.com/pins/' + markers[index]._id,
@@ -58,7 +56,7 @@ function fillPersonalPins() {
             headers: {
               'Authorization': 'Bearer ' + Lockr.get('idToken')
             }
-          }
+          };
           var request = $.ajax(options);
         });
       });
