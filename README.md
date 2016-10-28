@@ -1,7 +1,7 @@
 # travel pins
 ![Image of Landing page v6.0](/images/site6.png)
 ## project history
-![Image of Site v1.0](/images/site1.png)
+![Image of Site v1.0](/images/site1)
 ![Image of Site v2.0](/images/site2.png)
 ![Image of Site v3.0](/images/site3.png)
 ![Image of Site v4.0](/images/site4.png)
