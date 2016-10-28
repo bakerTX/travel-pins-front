@@ -2,7 +2,6 @@ var map;
 var geocoder;
 
 function initMap() {
-
   geocoder = new google.maps.Geocoder();
   var latlng = new google.maps.LatLng(20, -30);
   map = new google.maps.Map(document.getElementById('map'), {
@@ -11,14 +10,13 @@ function initMap() {
     minZoom:2
   });
 }
+
 var markers = []
 var examplePins = []
 
 ///
 // FILLING THE MAP
 function fillPersonalPins(){
-  console.log('fillingpersonal');
-  // ON THIS MAP, FILL WITH PREVIOUSLY STORED PINS
   var options = {
     url: 'http://localhost:3000/pins',
     headers: {
@@ -27,7 +25,6 @@ function fillPersonalPins(){
   }
   var request = $.ajax(options);
   request.done(function(response){
-    console.log(response);
     var infowindow = new google.maps.InfoWindow()
     for (var i = 0; i < response.length; i++){
       var marker = new google.maps.Marker({
@@ -43,9 +40,7 @@ function fillPersonalPins(){
 
       });
       markers.push(marker);
-
       google.maps.event.addListener(marker, 'click', function() {
-         console.log(this);
          this.infowindow.setContent(
          `City: ${this.location}<br>
          Date: ${this.date}<br>
@@ -54,7 +49,6 @@ function fillPersonalPins(){
          infowindow.open(map, this);
        });
        google.maps.event.addListener(marker, 'click', function(e) {
-        console.log(this);
         var index = this.index;
         const thismarker = e.currentTarget;
         $('#delete').click(function(thismarker) {
