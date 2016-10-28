@@ -109,7 +109,9 @@ Broaden the two major functionalities of the website
       
   
 * ### Bug Extermination
+
 * ### Completely refactor the codebase from scratch?
+
 * ### _Sell app to HomeAway, become rich_
 
 ## project history
