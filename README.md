@@ -5,6 +5,7 @@
 
 #### Google Maps API
 ```
+<div id="map"></div>
 <script>
   function initMap() {
     geocoder = new google.maps.Geocoder();
